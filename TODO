@@ -1,6 +1,8 @@
 -*- mode: Org -*-
 
-* Doc [0/1]
+* TODO Doc [0/1]
   - [ ] Document each of the step definitions
-* Steps [0/1]
+* TODO Steps [0/1]
   - [ ] Merge should/should-not see with pattern
+* TODO Testing [0/1]
+  - [ ] What testing framework to use?
