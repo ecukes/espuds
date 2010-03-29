@@ -115,6 +115,11 @@
       (lambda (file)
         (find-file (make-temp-file file))))
 
+(Given "a clean slate"
+       (lambda ()
+         (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
+         (delete-other-windows)))
+
 (defun espuds-fake-eval (contents)
   "Dumps contents to a temp file and then loads it."
   (let ((file (make-temp-file "ecukes-")))
