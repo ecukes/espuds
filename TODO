@@ -2,3 +2,5 @@
 
 * Doc [0/1]
   - [ ] Document each of the step definitions
+* Steps [0/1]
+  - [ ] Merge should/should-not see with pattern
