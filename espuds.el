@@ -87,13 +87,13 @@
              (setq espuds-action-chain (vconcat espuds-action-chain (string-to-vector typing)))
            (execute-kbd-macro (string-to-vector typing)))))
 
-(Then "^I should\\( not \\| \\)see \"\\(.+\\)\"$"
+(Then "^I should\\( not \\| \\)see\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (see contents)
         (let ((hit (search contents (espuds-buffer-contents))))
           (assert
            (if (string-match-p "not" see) (not hit) hit)))))
 
-(Then "^I should\\( not \\| \\)see pattern \"\\(.+\\)\"$"
+(Then "^I should\\( not \\| \\)see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (see contents)
         (let ((hit (string-match-p contents (espuds-buffer-contents))))
           (assert
