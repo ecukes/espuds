@@ -4,5 +4,6 @@
   - [ ] Document each of the step definitions
 * TODO Steps [0/1]
   - [ ] Merge should/should-not see with pattern
-* TODO Testing [0/1]
+* TODO Testing [0/2]
   - [ ] What testing framework to use?
+  - [ ] How to test definitions?
