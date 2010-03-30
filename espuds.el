@@ -50,7 +50,7 @@
        (lambda ()
          (erase-buffer)))
 
-(When "I insert this contents \"\\(.+\\)\""
+(When "^I insert this contents \"\\(.+\\)\"$"
       (lambda (contents)
         (insert contents)))
 
@@ -111,7 +111,7 @@
        (lambda (contents)
          (espuds-fake-eval contents)))
 
-(When "I am in the temp file \"\\(.+\\)\""
+(When "^I am in the temp file \"\\(.+\\)\"$"
       (lambda (file)
         (find-file (make-temp-file file))))
 
@@ -125,21 +125,21 @@
           (set-buffer "*Messages*")
           (assert (search message (buffer-substring-no-properties (point-min) (point-max)))))))
 
-(When "I set the mark"
+(When "^I set the mark$"
       (lambda ()
         (set-mark (point))))
 
-(When "I go to point \"\\([0-9]+\\)\""
+(When "^I go to point \"\\([0-9]+\\)\"$"
       (lambda (point)
         (goto-char (string-to-number point))))
 
-(When "I go to word \"\\(.+\\)\""
+(When "^I go to word \"\\(.+\\)\"$"
       (lambda (word)
         (goto-char (point-min))
         (re-search-forward (concat "\\b" word "\\b"))
         (backward-char (/ (length word) 2))))
 
-(Then "selected region should be\\(?: \"\\(.+\\)\"\\|:\\)"
+(Then "^selected region should be\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (region)
         (assert (equal (buffer-substring-no-properties (region-beginning) (region-end)) region))))
 
