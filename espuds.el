@@ -120,6 +120,35 @@
          (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
          (delete-other-windows)))
 
+(Given "^I am on line \"\\([0-9]+\\)\"$"
+       (lambda (line)
+         (goto-line (string-to-number line))))
+
+(Then "^I should see message \"\\(.+\\)\"$"
+      (lambda (message)
+        (save-excursion
+          (set-buffer "*Messages*")
+          (assert (search message (buffer-substring-no-properties (point-min) (point-max)))))))
+
+(When "I set the mark"
+      (lambda ()
+        (set-mark (point))))
+
+(When "I go to point \"\\([0-9]+\\)\""
+      (lambda (point)
+        (goto-char (string-to-number point))))
+
+(When "I go to word \"\\(.+\\)\""
+      (lambda (word)
+        (goto-char (point-min))
+        (re-search-forward (concat "\\b" word "\\b"))
+        (backward-char (/ (length word) 2))))
+
+(Then "selected region should be\\(?: \"\\(.+\\)\"\\|:\\)"
+      (lambda (region)
+        (assert (equal (buffer-substring-no-properties (region-beginning) (region-end)) region))))
+
+
 (defun espuds-fake-eval (contents)
   "Dumps contents to a temp file and then loads it."
   (let ((file (make-temp-file "ecukes-")))
