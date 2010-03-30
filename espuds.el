@@ -115,11 +115,6 @@
       (lambda (file)
         (find-file (make-temp-file file))))
 
-(Given "a clean slate"
-       (lambda ()
-         (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
-         (delete-other-windows)))
-
 (Given "^I am on line \"\\([0-9]+\\)\"$"
        (lambda (line)
          (goto-line (string-to-number line))))
