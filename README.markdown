@@ -18,7 +18,7 @@ Thats it!
 
 
 ## Step Definitions
-TODO: Document step definitions
+See source file for description of each step definition.
 
 
 ## Gotchas
