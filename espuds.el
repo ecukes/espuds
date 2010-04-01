@@ -121,9 +121,7 @@
 
 (Then "^I should see message \"\\(.+\\)\"$"
       (lambda (message)
-        (save-excursion
-          (set-buffer "*Messages*")
-          (assert (search message (buffer-substring-no-properties (point-min) (point-max)))))))
+        (assert (member message ecukes-messages))))
 
 (When "^I set the mark$"
       (lambda ()
