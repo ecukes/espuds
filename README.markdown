@@ -1,29 +1,31 @@
 # Espuds - Ecukes step definitions
 
 First of all. If you don't know what
-[Ecukes](http://github.com/rejeep/ecukes)
-it, go read up about it. If you have, you should know that in order to
-test with Ecukes, you need to translate your feature files in some way
-so that Emacs understands them. You do that by definining step
-definitions.
+[Ecukes](http://github.com/rejeep/ecukes) it, go read up about it. If
+you have, you should know that in order to test with Ecukes, you need
+to translate your steps so that Emacs understands them. You do that
+with step definitions.
 
-Espuds collects the most common step definitions (or spuds) that you
-almost always want when using Ecukes.
+Espuds is a collection of the most commonly used step definitions.
 
 
 ## Usage
-To use Espuds, you have load it in your project file **features/support.el**.
+To use Espuds, you have load it in your **features/support.el** file.
     (add-to-list 'load-path "/path/to/espuds)
     (require 'espuds)
     
 Thats it!
 
 
-## Heads up
-Some actions require more than one step. For example functions that
-reads input (not via interactive).
+## Step Definitions
+TODO: Document step definitions
 
-To handle these cases, you have to do it in an action block. For example:
+
+## Heads up
+Some actions require more than one keyboard input. For example
+functions that reads input via the minibuffer (not via interactive).
+
+To handle such cases, you wrap the actions in a block. For example:
     Given I start an action chain
     And I press "some key"
     And I type "some sequence"
