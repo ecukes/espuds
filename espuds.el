@@ -92,12 +92,27 @@
 ;;   """
 (Then "^I should\\( not \\| \\)see\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (see expected)
-        (let* ((actual (espuds-buffer-contents))
-               (found (search expected actual)))
-          (assert
-           (if (string-match-p "not" see) (not found) found) nil
-           (concat
-            "Expected \"" actual "\" to include \"" expected "\"")))))
+        (should-or-should-not-see see expected 'search)))
+
+;; Asserts that the current buffer matches or don't matches some text.
+;;
+;; Usage:
+;;   Then I should see pattern "CONTENTS"
+;;
+;;   Then I should not see pattern "CONTENTS"
+;;
+;;   Then I should see pattern:
+;;   """
+;;   CONTENTS
+;;   """
+;;
+;;   Then I should not see pattern:
+;;   """
+;;   CONTENTS
+;;   """
+(Then "^I should\\( not \\| \\)see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
+      (lambda (see expected)
+        (should-or-should-not-see see expected 'string-match-p)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; BUFFERS END ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -300,6 +315,16 @@
 (defun espuds-region ()
   "Returns the text selected by region."
   (buffer-substring-no-properties (region-beginning) (region-end)))
+
+(defun should-or-should-not-see (see expected compare-fn)
+  "Asserts that buffer text matches or not matches (depending on see)
+EXPECTED with COMPARE-FN."
+  (let* ((actual (espuds-buffer-contents))
+         (found (funcall compare-fn expected actual)))
+    (assert
+     (if (string-match-p "not" see) (not found) found) nil
+     (concat
+      "Expected \"" expected "\", but was  \"" actual "\""))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; HELPERS END ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
