@@ -21,7 +21,9 @@ Thats it!
 TODO: Document step definitions
 
 
-## Heads up
+## Gotchas
+
+### Action Chain
 Some actions require more than one keyboard input. For example
 functions that reads input via the minibuffer (not via interactive).
 
