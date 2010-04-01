@@ -176,7 +176,7 @@
               (line-num (string-to-number line)))
           (if (> line-num num-lines)
               (assert nil nil (concat "Tried to go to line " line ", but buffer does only have " (number-to-string num-lines) " lines."))
-            (goto-line line)))))
+            (goto-line line-num)))))
 
 ;; Goes to POINT if it exist.
 ;;
