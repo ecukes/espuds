@@ -28,12 +28,12 @@ Some actions require more than one keyboard input. For example
 functions that reads input via the minibuffer (not via interactive).
 
 To handle such cases, you wrap the actions in a block. For example:
-    Given I start an action chain
-    And I press "some key"
-    And I type "some sequence"
-    And I press "some other key"
-    And I execute the action chain
-
+    Scenario: Activate linum mode
+      Given I start an action chain
+      And I press "M-x"
+      And I type "linum-mode"
+      And I execute the action chain
+      Then linum-mode should be active
 
 ## Contributing
 We all test different kind of applications. It is therefore important
