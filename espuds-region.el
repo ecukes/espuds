@@ -30,13 +30,13 @@
 ;; Asserts that the selected region is same as EXPECTED.
 ;;
 ;; Usage:
-;;   Then selected region should be "REGION"
+;;   Then the region should be "REGION"
 ;;
-;;   Then selected region should be:
+;;   Then the region should be:
 ;;   """
 ;;   REGION
 ;;   """
-(Then "^selected region should be\\(?: \"\\(.+\\)\"\\|:\\)$"
+(Then "^the region should be\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (expected)
         (let ((actual (espuds-region)))
           (assert

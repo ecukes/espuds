@@ -1,22 +1,22 @@
-;;; espuds-rest.el --- Rest related definitions
+;;; espuds-rest.el --- Definitions that don't fit in any other file
 
 
 ;; Loads CONTENTS with Emacs load command.
 ;;
 ;; Usage:
-;;   Given the following is loaded:
+;;   When I load the following:
 ;;   """
 ;;   CONTENTS
 ;;   """
-(Given "^the following is loaded:$"
+(When "^I load the following:$"
        (lambda (contents)
          (espuds-fake-eval contents)))
 
 ;; Creates a new temp file called FILE and opens it.
 ;;
 ;; Usage:
-;;   When I am in the temp file "SOME FILE"
-(When "^I am in the temp file \"\\(.+\\)\"$"
+;;   When I open temp file "SOME FILE"
+(When "^I open temp file \"\\(.+\\)\"$"
       (lambda (file)
         (find-file (make-temp-file file))))
 

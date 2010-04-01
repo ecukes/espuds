@@ -4,8 +4,8 @@
 ;; Switches buffer in the current window to BUFFER.
 ;;
 ;; Usage:
-;;   Given I am in the buffer "*scratch*"
-(Given "^I am in the buffer \"\\(.+\\)\"$"
+;;   Given I am in buffer "*scratch*"
+(Given "^I am in buffer \"\\(.+\\)\"$"
        (lambda (buffer)
          (switch-to-buffer (get-buffer-create buffer))))
 
