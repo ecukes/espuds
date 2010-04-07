@@ -40,7 +40,7 @@
   (require 'espuds-input)
   (require 'espuds-movement)
   (require 'espuds-region)
-  (require 'espuds-rest))
+  (require 'espuds-misc))
 
 (provide 'espuds)
 

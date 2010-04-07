@@ -1,4 +1,4 @@
-;;; espuds-rest.el --- Definitions that don't fit in any other file
+;;; espuds-misc.el --- Definitions that don't fit in any other file
 
 
 ;; Loads CONTENTS with Emacs load command.
@@ -27,10 +27,10 @@
 (Then "^I should see message \"\\(.+\\)\"$"
       (lambda (message)
         (assert
-         (member message ecukes-messages) nil
+         (member message ecukes-message-history) nil
          (concat "Expected \"" message "\" to be included in the list of printed messages."))))
 
 
-(provide 'espuds-rest)
+(provide 'espuds-misc)
 
-;;; espuds-rest.el ends here
+;;; espuds-misc.el ends here
