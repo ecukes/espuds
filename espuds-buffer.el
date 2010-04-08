@@ -17,6 +17,14 @@
        (lambda ()
          (erase-buffer)))
 
+;; Clears all text in the current buffer.
+;;
+;; Usage:
+;;   When I clear the buffer
+(When "I clear the buffer"
+       (lambda ()
+         (erase-buffer)))
+
 
 (provide 'espuds-buffer)
 
