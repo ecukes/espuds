@@ -26,9 +26,11 @@
 ;;   Then I should see message "MESSAGE"
 (Then "^I should see message \"\\(.+\\)\"$"
       (lambda (message)
-        (assert
-         (member message ecukes-message-history) nil
-         (concat "Expected \"" message "\" to be included in the list of printed messages."))))
+        (save-excursion
+          (set-buffer "*Messages*")
+          (assert
+           (search message (espuds-buffer-contents)) nil
+           (concat "Expected \"" message "\" to be included in the list of printed messages.")))))
 
 
 (provide 'espuds-misc)
