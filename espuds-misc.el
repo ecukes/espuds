@@ -9,8 +9,8 @@
 ;;   CONTENTS
 ;;   """
 (When "^I load the following:$"
-       (lambda (contents)
-         (espuds-fake-eval contents)))
+      (lambda (contents)
+        (espuds-fake-eval contents)))
 
 ;; Creates a new temp file called FILE and opens it.
 ;;
