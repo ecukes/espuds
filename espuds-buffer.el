@@ -7,7 +7,7 @@
 ;;   Given I am in buffer "*scratch*"
 (Given "^I am in buffer \"\\(.+\\)\"$"
        (lambda (buffer)
-         (let ((v (vconcat [?\C-x ?b] (string-to-vector buffer) (vector 'return))))
+         (let ((v (vconcat [?\C-x ?b] (string-to-vector buffer))))
            (execute-kbd-macro v))))
 
 ;; Clears all text in the current buffer.
