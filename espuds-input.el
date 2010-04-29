@@ -33,6 +33,7 @@
 ;;   When I press "C-h e"
 (When "^I press \"\\(.+\\)\"$"
       (lambda (keybinding)
+        (should (key-binding (read-kbd-macro keybinding)))
         (if espuds-chain-active
             (setq espuds-action-chain (vconcat espuds-action-chain (edmacro-parse-keys keybinding)))
           (execute-kbd-macro (edmacro-parse-keys keybinding)))))
