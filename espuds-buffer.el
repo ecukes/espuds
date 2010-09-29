@@ -16,10 +16,18 @@
 ;;   Then I should be in buffer "*scratch*"
 (Then "^I should be in buffer \"\\(.+\\)\"$"
       (lambda (buffer)
-        (should
-         (string-match-p
-          (concat buffer "$")
-          (buffer-file-name)))))
+        (should (equal buffer (buffer-name)))))
+
+;; Asserts that the current buffer is connected to FILE.
+;;
+;; Usage:
+;;   Then I should be in file "/path/to/some/file"
+(Then "^I should be in file \"\\(.+\\)\"$"
+      (lambda (file)
+        (let ((file-name (buffer-file-name)))
+          (should file-name)
+          (should (string-match-p (concat file "$") file-name)))))
+
 
 ;; Clears all text in the current buffer.
 ;;
