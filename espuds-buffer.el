@@ -10,6 +10,17 @@
          (let ((v (vconcat [?\C-x ?b] (string-to-vector buffer))))
            (execute-kbd-macro v))))
 
+;; Asserts that the current buffer is BUFFER.
+;;
+;; Usage:
+;;   Then I should be in buffer "*scratch*"
+(Then "^I should be in buffer \"\\(.+\\)\"$"
+      (lambda (buffer)
+        (should
+         (string-match-p
+          (concat buffer "$")
+          (buffer-file-name)))))
+
 ;; Clears all text in the current buffer.
 ;;
 ;; Usage:
