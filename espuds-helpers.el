@@ -16,16 +16,6 @@
   "Returns the text selected by region."
   (buffer-substring-no-properties (region-beginning) (region-end)))
 
-(defun should-or-should-not-see (see expected compare-fn)
-  "Asserts that buffer text matches or not matches (depending on see)
-EXPECTED with COMPARE-FN."
-  (let* ((actual (espuds-buffer-contents))
-         (found (funcall compare-fn expected actual)))
-    (assert
-     (if (string-match-p "not" see) (not found) found) nil
-     (concat
-      "Expected \"" expected "\", but was  \"" actual "\""))))
-
 
 (provide 'espuds-helpers)
 

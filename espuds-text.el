@@ -15,45 +15,66 @@
         (insert contents)))
 
 
-;; Asserts that the current buffer includes or not includes some text.
+;; Asserts that the current buffer includes some text.
 ;;
 ;; Usage:
 ;;   Then I should see "CONTENTS"
-;;
-;;   Then I should not see "CONTENTS"
 ;;
 ;;   Then I should see:
 ;;   """
 ;;   CONTENTS
 ;;   """
+(Then "^I should see\\(?: \"\\(.+\\)\"\\|:\\)$"
+      (lambda (expected)
+        (let ((actual (espuds-buffer-contents)))
+          (assert
+           (search expected actual)))))
+
+;; Asserts that the current buffer does not include some text.
+;;
+;; Usage:
+;;   Then I should not see "CONTENTS"
 ;;
 ;;   Then I should not see:
 ;;   """
 ;;   CONTENTS
 ;;   """
-(Then "^I should\\( not \\| \\)see\\(?: \"\\(.+\\)\"\\|:\\)$"
-      (lambda (see expected)
-        (should-or-should-not-see see expected 'search)))
+(Then "^I should not see\\(?: \"\\(.+\\)\"\\|:\\)$"
+      (lambda (expected)
+        (let ((actual (espuds-buffer-contents)))
+          (assert
+           (not (search expected actual))))))
 
-;; Asserts that the current buffer matches or don't matches some text.
+
+;; Asserts that the current buffer matches some text.
 ;;
 ;; Usage:
 ;;   Then I should see pattern "CONTENTS"
-;;
-;;   Then I should not see pattern "CONTENTS"
 ;;
 ;;   Then I should see pattern:
 ;;   """
 ;;   CONTENTS
 ;;   """
+(Then "^I should see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
+      (lambda (expected)
+        (let ((actual (espuds-buffer-contents)))
+          (assert
+           (string-match-p expected actual)))))
+
+;; Asserts that the current buffer does not match some text.
+;;
+;; Usage:
+;;   Then I should not see pattern "CONTENTS"
 ;;
 ;;   Then I should not see pattern:
 ;;   """
 ;;   CONTENTS
 ;;   """
-(Then "^I should\\( not \\| \\)see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
-      (lambda (see expected)
-        (should-or-should-not-see see expected 'string-match-p)))
+(Then "^I should not see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
+      (lambda (expected)
+        (let ((actual (espuds-buffer-contents)))
+          (assert
+           (not (string-match-p expected actual))))))
 
 ;; Selects TEXT if found.
 ;;
