@@ -88,6 +88,14 @@
         (set-mark (point))
         (re-search-backward text)))
 
+;; Asserts that there nothing to see in the current buffer.
+;;
+;; Usage:
+;;   Then I should not see anything
+(Then "I should not see anything"
+      (lambda ()
+        (assert (equal (buffer-size) 0))))
+
 
 (provide 'espuds-text)
 

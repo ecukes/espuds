@@ -1,5 +1,13 @@
 ;;; espuds-misc.el --- Definitions that don't fit in any other file
 
+;; Turns on some mode.
+;;
+;; Usage:
+;;   When I turn on ruby-mode
+(When "^I turn on \\(.+\\)$"
+      (lambda (mode)
+        (let ((v (vconcat [?\C-u 1 ?\M-x] (string-to-vector mode))))
+          (execute-kbd-macro v))))
 
 ;; Loads CONTENTS with Emacs load command.
 ;;

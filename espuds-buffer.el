@@ -45,6 +45,15 @@
       (lambda ()
         (erase-buffer)))
 
+;; Switches to BUFFER.
+;;
+;; Usage:
+;;   When I switch to buffer "Foo"
+(When "^I switch to buffer \"\\(.+\\)\"$"
+      (lambda (buffer)
+        (let ((v (vconcat [?\C-x ?b] (string-to-vector buffer))))
+          (execute-kbd-macro v))))
+
 
 (provide 'espuds-buffer)
 

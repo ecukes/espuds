@@ -35,6 +35,55 @@
           (assert nil nil (concat "The word \"" word "\" does not exist in the current buffer.")))
         (backward-char (/ (length word) 2))))
 
+;; Checks that the cursor is after some text.
+;;
+;; Usage:
+;;   Then the cursor should be after "Foo"
+(Then "^the cursor should be after \"\\(.+\\)\"$"
+      (lambda (right)
+        (assert (looking-back (regexp-quote right)))))
+
+;; Checks that the cursor is before some text.
+;;
+;; Usage:
+;;   Then the cursor should be before "Foo"
+(Then "^the cursor should be before \"\\(.+\\)\"$"
+      (lambda (left)
+        (assert (looking-at (regexp-quote left)))))
+
+;; Checks that the cursor is between some text.
+;;
+;; Usage:
+;;   Then the cursor should be between "Foo" and "Bar"
+(Then "^the cursor should be between \"\\(.+\\)\" and \"\\(.+\\)\"$"
+      (lambda (left right)
+        (assert
+         (and
+          (looking-back (regexp-quote left))
+          (looking-at (regexp-quote right))))))
+
+;; Places the cursor between text.
+;;
+;; Usage:
+;;   When I place the cursor between "Foo" and "Bar"
+(When "^I place the cursor between \"\\(.+\\)\" and \"\\(.+\\)\"$"
+      (lambda (left right)
+        (goto-char (point-min))
+        (assert (search-forward (concat left right) nil t))
+        (backward-char (length right))))
+
+;; Places the cursor at the beginning of buffer.
+;;
+;; Usage:
+;;   When I go to beginning of buffer
+(When "^I go to beginning of buffer$" 'beginning-of-buffer)
+
+;; Places the cursor at the end of buffer.
+;;
+;; Usage:
+;;   When I go to end of buffer
+(When "^I go to end of buffer$" 'end-of-buffer)
+
 
 (provide 'espuds-movement)
 
