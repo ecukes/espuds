@@ -38,10 +38,9 @@
 ;;   """
 (Then "^the region should be\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (expected)
-        (let ((actual (espuds-region)))
-          (assert
-           (equal expected actual) nil
-           (concat "Expected region \"" actual "\" to include \"" expected "\"")))))
+        (let ((actual (espuds-region))
+              (message "Expected the region to be '%s', but was '%s'."))
+          (assert (equal expected actual) nil message expected actual))))
 
 
 (provide 'espuds-region)

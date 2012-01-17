@@ -1,6 +1,5 @@
 ;;; espuds-text.el --- Text related definitions
 
-
 ;; Inserts CONTENTS into the current buffer.
 ;;
 ;; Usage:
@@ -26,9 +25,9 @@
 ;;   """
 (Then "^I should see\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (expected)
-        (let ((actual (espuds-buffer-contents)))
-          (assert
-           (search expected actual)))))
+        (let ((actual (espuds-buffer-contents))
+              (message "Expected '%s' to be part of '%s', but was not."))
+          (assert (search expected actual) nil message expected actual))))
 
 ;; Asserts that the current buffer does not include some text.
 ;;
@@ -41,9 +40,9 @@
 ;;   """
 (Then "^I should not see\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (expected)
-        (let ((actual (espuds-buffer-contents)))
-          (assert
-           (not (search expected actual))))))
+        (let ((actual (espuds-buffer-contents))
+              (message "Expected '%s' to not be part of '%s', but was."))
+          (assert (not (search expected actual)) nil message expected actual))))
 
 
 ;; Asserts that the current buffer matches some text.
@@ -57,9 +56,10 @@
 ;;   """
 (Then "^I should see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (expected)
-        (let ((actual (espuds-buffer-contents)))
+        (let ((actual (espuds-buffer-contents))
+              (message "Expected to see pattern '%s' in '%s', but did not."))
           (assert
-           (string-match-p expected actual)))))
+           (string-match-p expected actual) nil message expected actual))))
 
 ;; Asserts that the current buffer does not match some text.
 ;;
@@ -72,19 +72,21 @@
 ;;   """
 (Then "^I should not see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
       (lambda (expected)
-        (let ((actual (espuds-buffer-contents)))
+        (let ((actual (espuds-buffer-contents))
+              (message "Expected to not see pattern '%s' in '%s', but did."))
           (assert
-           (not (string-match-p expected actual))))))
+           (not (string-match-p expected actual)) nil message expected actual))))
 
-;; Selects TEXT if found.
+;; Selects TEXT if found. Otherwise signal an error.
 ;;
 ;; Usage:
 ;;   When I select "SOME TEXT"
+;;
 (When "^I select \"\\(.+\\)\"$"
       (lambda (text)
         (goto-char (point-min))
-        (unless (re-search-forward text nil t)
-          (assert nil nil (concat "The text \"" text "\" does not exist in the current buffer.")))
+        (let ((search (re-search-forward text nil t)))
+          (assert search nil "The text '%s' was not found in the current buffer." text))
         (set-mark (point))
         (re-search-backward text)))
 
@@ -92,9 +94,11 @@
 ;;
 ;; Usage:
 ;;   Then I should not see anything
-(Then "I should not see anything"
+;;   Then the buffer should be empty
+(Then "^I should not see anything$\\|^the buffer should be empty$"
       (lambda ()
-        (assert (equal (buffer-size) 0))))
+        (let ((message "Expected buffer to be empty, but had content: '%s'"))
+          (assert (equal (buffer-size) 0) nil message (espuds-buffer-contents)))))
 
 
 (provide 'espuds-text)

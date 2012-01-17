@@ -36,9 +36,9 @@
       (lambda (message)
         (save-excursion
           (set-buffer "*Messages*")
-          (assert
-           (search message (espuds-buffer-contents)) nil
-           (concat "Expected \"" message "\" to be included in the list of printed messages.")))))
+          (let ((search (search message (espuds-buffer-contents))))
+            (assert
+             search nil "Expected '%s' to be included in the list of printed messages, but was not." message)))))
 
 
 (provide 'espuds-misc)

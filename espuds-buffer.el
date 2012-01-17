@@ -25,25 +25,19 @@
 (Then "^I should be in file \"\\(.+\\)\"$"
       (lambda (file)
         (let ((file-name (buffer-file-name)))
-          (should file-name)
-          (should (string-match-p (concat file "$") file-name)))))
+          (assert file-name nil "Expected file to be '%s', but not visiting any file." file)
+          (let ((match (string-match-p (concat file "$") file-name)))
+            (assert match nil "Expected file to be '%s', but was '%s'." file file-name)))))
 
 
 ;; Clears all text in the current buffer.
 ;;
 ;; Usage:
 ;;   Given the buffer is empty
-(Given "^the buffer is empty$"
+;;   When I clear the buffer
+(Given "^the buffer is empty$\\|^I clear the buffer$"
        (lambda ()
          (erase-buffer)))
-
-;; Clears all text in the current buffer.
-;;
-;; Usage:
-;;   When I clear the buffer
-(When "I clear the buffer"
-      (lambda ()
-        (erase-buffer)))
 
 ;; Switches to BUFFER.
 ;;

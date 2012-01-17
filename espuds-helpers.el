@@ -10,7 +10,7 @@
 
 (defun espuds-buffer-contents ()
   "Returns all text in current buffer."
-  (buffer-substring-no-properties (point-min) (point-max)))
+  (buffer-string))
 
 (defun espuds-region ()
   "Returns the text selected by region."
