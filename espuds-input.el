@@ -5,7 +5,7 @@
   "List of actions to execute.")
 
 (defvar espuds-chain-active nil
-  "t if chaining is active, nil otherwise.")
+  "Is t if chaining is active, nil otherwise.")
 
 
 ;; Starts an action chain.

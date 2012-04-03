@@ -2,18 +2,18 @@
 
 
 (defun espuds-fake-eval (contents)
-  "Dumps contents to a temp file and then loads it."
+  "Dump contents to a temp file and then load it."
   (let ((file (make-temp-file "ecukes-")))
     (with-temp-file file
       (insert contents))
     (load file)))
 
 (defun espuds-buffer-contents ()
-  "Returns all text in current buffer."
+  "Return all text in current buffer."
   (buffer-string))
 
 (defun espuds-region ()
-  "Returns the text selected by region."
+  "Return the text selected by region."
   (buffer-substring-no-properties (region-beginning) (region-end)))
 
 
