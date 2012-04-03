@@ -33,10 +33,10 @@
 ;;   When I press "C-h e"
 (When "^I press \"\\(.+\\)\"$"
       (lambda (keybinding)
-        (key-binding (read-kbd-macro keybinding))
-        (if espuds-chain-active
-            (setq espuds-action-chain (vconcat espuds-action-chain (edmacro-parse-keys keybinding)))
-          (execute-kbd-macro (edmacro-parse-keys keybinding)))))
+        (let ((macro (edmacro-parse-keys keybinding)))
+          (if espuds-chain-active
+              (setq espuds-action-chain (vconcat espuds-action-chain macro))
+            (execute-kbd-macro macro)))))
 
 ;; If action chaining is active. Add TYPING to the action
 ;; chain. Otherwise simulate the TYPING.
