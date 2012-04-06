@@ -22,7 +22,7 @@
         (let ((size (buffer-size))
               (point-num (string-to-number point))
               (message "Requested point '%s', but buffer only has '%d' point(s)."))
-          (assert (<= point-num size) nil message point-num size)
+          (assert (<= (1- point-num) size) nil message point-num size)
           (goto-char point-num))))
 
 ;; Go to WORD if it exist.
