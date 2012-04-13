@@ -36,7 +36,7 @@
 ;;   """
 ;;   REGION
 ;;   """
-(Then "^the region should be\\(?: \"\\(.+\\)\"\\|:\\)$"
+(Then "^the region should be\\(?: \"\\(.*\\)\"\\|:\\)$"
       (lambda (expected)
         (let ((actual (espuds-region))
               (message "Expected the region to be '%s', but was '%s'."))
