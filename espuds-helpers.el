@@ -13,8 +13,10 @@
   (buffer-string))
 
 (defun espuds-region ()
-  "Return the text selected by region."
-  (buffer-substring-no-properties (region-beginning) (region-end)))
+  "Return the text selected by region, if any."
+  (if (region-active-p)
+      (buffer-substring-no-properties (region-beginning) (region-end))
+    ""))
 
 
 (provide 'espuds-helpers)
