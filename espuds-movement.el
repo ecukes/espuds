@@ -37,6 +37,17 @@
           (assert search nil message word (espuds-buffer-contents)))
         (backward-char (length word))))
 
+;; Checks that the cursor is at a specific position.
+;;
+;; Usage:
+;;   Then the cursor should be at point "12"
+(Then "^the cursor should be at point \"\\(.+\\)\"$"
+      (lambda (arg)
+        (should
+         (=
+          (string-to-number arg)
+          (point)))))
+
 ;; Checks that the cursor is before some text.
 ;;
 ;; Usage:
