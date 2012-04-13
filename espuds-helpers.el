@@ -18,6 +18,10 @@
       (buffer-substring-no-properties (region-beginning) (region-end))
     ""))
 
+(defun espuds-quit ()
+  "Quit without signal."
+  (flet ((signal (&rest args) nil))
+    (keyboard-quit)))
 
 (provide 'espuds-helpers)
 

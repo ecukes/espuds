@@ -36,7 +36,15 @@
         (let ((macro (edmacro-parse-keys keybinding)))
           (if espuds-chain-active
               (setq espuds-action-chain (vconcat espuds-action-chain macro))
-            (execute-kbd-macro macro)))))
+            (if (equal keybinding "C-g")
+                (espuds-quit)
+              (execute-kbd-macro macro))))))
+
+;; Quit without signal.
+;;
+;; Usage:
+;;   When I quit
+(When "^I quit$" 'espuds-quit)
 
 ;; If action chaining is active. Add TYPING to the action
 ;; chain. Otherwise simulate the TYPING.
