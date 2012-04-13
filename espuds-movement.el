@@ -105,6 +105,17 @@
           (assert search nil message left right (espuds-buffer-contents)))
         (backward-char (length right))))
 
+;; Places the cursor after first instance of text.
+;;
+;; Usage:
+;;   When I place the cursor after "Foo"
+(When "^I place the cursor after \"\\(.+\\)\"$"
+      (lambda (arg)
+        (goto-char (point-min))
+        (let ((search (search-forward arg nil t))
+              (message "Can not place cursor after '%s', because there is no such point: '%s'"))
+          (assert search nil message arg (espuds-buffer-contents)))))
+
 ;; Places the cursor at the beginning of buffer.
 ;;
 ;; Usage:
