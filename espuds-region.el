@@ -27,6 +27,14 @@
       (lambda ()
         (set-mark (point))))
 
+;; Pop and move point to the top position on the mark-ring
+;;
+;; Usage:
+;;   When I pop the mark
+(When "^I pop the mark$"
+      (lambda ()
+        (set-mark-command 4)))
+
 ;; Asserts that the selected region is same as EXPECTED.
 ;;
 ;; Usage:
@@ -42,6 +50,14 @@
               (message "Expected the region to be '%s', but was '%s'."))
           (assert (equal expected actual) nil message expected actual))))
 
+;; Asserts that the region is not active.
+;;
+;; Usage:
+;;   Then the region should not be active
+(Then "^the region should not be active$"
+      (lambda ()
+        (should
+         (not (region-active-p)))))
 
 (provide 'espuds-region)
 
