@@ -14,7 +14,7 @@
 
 (defun espuds-region ()
   "Return the text selected by region, if any."
-  (if (region-active-p)
+  (if mark-active
       (buffer-substring-no-properties (region-beginning) (region-end))
     ""))
 
