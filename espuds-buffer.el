@@ -16,7 +16,9 @@
 ;;   Then I should be in buffer "*scratch*"
 (Then "^I should be in buffer \"\\(.+\\)\"$"
       (lambda (buffer)
-        (should (equal buffer (buffer-name)))))
+        (let ((message "Expected to be in buffer '%s', but was in '%s'"))
+          (assert (equal buffer (buffer-name)) nil message buffer (buffer-name)))))
+
 
 ;; Asserts that the current buffer is connected to FILE.
 ;;
