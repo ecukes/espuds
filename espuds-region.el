@@ -33,7 +33,7 @@
 ;;   When I pop the mark
 (When "^I pop the mark$"
       (lambda ()
-        (call-interactively 'set-mark-command)))
+        (set-mark-command 4)))
 
 ;; Asserts that the selected region is same as EXPECTED.
 ;;
