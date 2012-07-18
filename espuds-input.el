@@ -36,7 +36,8 @@
         (let ((macro (edmacro-parse-keys keybinding)))
           (if espuds-chain-active
               (setq espuds-action-chain (vconcat espuds-action-chain macro))
-            (if (equal keybinding "C-g")
+            (if (and (equal keybinding "C-g")
+                     (eq (key-binding (kbd "C-g")) 'keyboard-quit))
                 (espuds-quit)
               (execute-kbd-macro macro))))))
 
