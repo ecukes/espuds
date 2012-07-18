@@ -56,8 +56,8 @@
 ;;   Then the region should not be active
 (Then "^the region should not be active$"
       (lambda ()
-        (should
-         (not (region-active-p)))))
+        (let ((message "Expected the region not to be active, but it was."))
+          (assert (not (region-active-p)) nil message))))
 
 (provide 'espuds-region)
 

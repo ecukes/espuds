@@ -42,11 +42,9 @@
 ;; Usage:
 ;;   Then the cursor should be at point "12"
 (Then "^the cursor should be at point \"\\(.+\\)\"$"
-      (lambda (arg)
-        (should
-         (=
-          (string-to-number arg)
-          (point)))))
+      (lambda (point)
+        (let ((message "Expected cursor to be at point '%s', but was at '%s'"))
+          (assert (= (string-to-number point) (point)) nil message point (point)))))
 
 ;; Checks that the cursor is before some text.
 ;;

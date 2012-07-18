@@ -1,11 +1,12 @@
 ;;; espuds-buffer.el --- Buffer related definitions
 
 
-;; Switches buffer in the current window to BUFFER.
+;; Switches to BUFFER.
 ;;
 ;; Usage:
+;;   When I switch to buffer "Foo"
 ;;   Given I am in buffer "*scratch*"
-(Given "^I am in buffer \"\\(.+\\)\"$"
+(Given "^\\(?:I am in buffer\\|I switch to buffer\\) \"\\(.+\\)\"$"
        (lambda (buffer)
          (let ((v (vconcat [?\C-x ?b] (string-to-vector buffer))))
            (execute-kbd-macro v))))
@@ -16,7 +17,9 @@
 ;;   Then I should be in buffer "*scratch*"
 (Then "^I should be in buffer \"\\(.+\\)\"$"
       (lambda (buffer)
-        (should (equal buffer (buffer-name)))))
+        (let ((message "Expected to be in buffer '%s', but was in '%s'"))
+          (assert (equal buffer (buffer-name)) nil message buffer (buffer-name)))))
+
 
 ;; Asserts that the current buffer is connected to FILE.
 ;;
@@ -38,15 +41,6 @@
 (Given "^the buffer is empty$\\|^I clear the buffer$"
        (lambda ()
          (erase-buffer)))
-
-;; Switches to BUFFER.
-;;
-;; Usage:
-;;   When I switch to buffer "Foo"
-(When "^I switch to buffer \"\\(.+\\)\"$"
-      (lambda (buffer)
-        (let ((v (vconcat [?\C-x ?b] (string-to-vector buffer))))
-          (execute-kbd-macro v))))
 
 
 (provide 'espuds-buffer)
