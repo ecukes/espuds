@@ -9,6 +9,14 @@
         (let ((v (vconcat [?\C-u 1 ?\M-x] (string-to-vector mode))))
           (execute-kbd-macro v))))
 
+;; Set some variable
+;;
+;; Usage:
+;;   When I set sentence-end-double-space to nil
+(When "^I set \\(.+\\) to \\(.+\\)$"
+      (lambda (var val)
+        (set (intern var) (read val))))
+
 ;; Loads CONTENTS with Emacs load command.
 ;;
 ;; Usage:
