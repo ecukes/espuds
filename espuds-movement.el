@@ -138,6 +138,18 @@
 ;;   When I go to end of buffer
 (When "^I go to end of buffer$" 'end-of-buffer)
 
+;; Places the cursor at the beginning of the line.
+;;
+;; Usage:
+;;   When I go to beginning of line
+(When "^I go to beginning of line$" 'move-beginning-of-line)
+
+;; Places the cursor at the end of the line.
+;;
+;; Usage:
+;;   When I go to end of line
+(When "^I go to end of line$" 'move-end-of-line)
+
 
 (provide 'espuds-movement)
 
