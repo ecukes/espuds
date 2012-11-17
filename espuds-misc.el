@@ -42,11 +42,10 @@
 ;;   Then I should see message "MESSAGE"
 (Then "^I should see message \"\\(.+\\)\"$"
       (lambda (message)
-        (save-excursion
-          (set-buffer "*Messages*")
-          (let ((search (search message (espuds-buffer-contents))))
-            (assert
-             search nil "Expected '%s' to be included in the list of printed messages, but was not." message)))))
+        (assert
+         (-contains? ecukes-message-log message)
+         nil
+         "Expected '%s' to be included in the list of printed messages, but was not." message)))
 
 
 (provide 'espuds-misc)
