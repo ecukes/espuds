@@ -13,6 +13,7 @@
 (setq debug-on-entry t)
 (setq debug-on-error t)
 
+(require 'cl)
 (require 'el-mock)
 
 (load (expand-file-name "test-helper.el" espuds-test-path) nil t)
