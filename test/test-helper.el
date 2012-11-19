@@ -24,9 +24,10 @@
      espuds-steps)
     (unless matching
       (error "No matching step for '%s'" name))
-    (when (string-match (car matching) name)
-      (let ((i 1))
-        (while (match-string i name)
-          (add-to-list 'matches (match-string i name) t 'eq)
-          (setq i (1+ i)))))
-    (apply (cdr matching) matches)))
+    (unless args
+      (when (string-match (car matching) name)
+        (let ((i 1))
+          (while (match-string i name)
+            (add-to-list 'matches (match-string i name) t 'eq)
+            (setq i (1+ i))))))
+    (apply (cdr matching) (or args matches))))
