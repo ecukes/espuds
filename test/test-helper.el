@@ -31,3 +31,10 @@
             (add-to-list 'matches (match-string i name) t 'eq)
             (setq i (1+ i))))))
     (apply (cdr matching) (or args matches))))
+
+(defmacro with-setup (&rest body)
+  `(save-excursion
+     (save-restriction
+       (set-buffer (get-buffer-create "*espuds*"))
+       (erase-buffer)
+       ,@body)))
