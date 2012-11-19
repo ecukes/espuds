@@ -22,7 +22,8 @@
        (if (string-match-p (car step) name)
            (setq matching step)))
      espuds-steps)
-    (string-match (car matching) name)
+    (unless matching
+      (error "No matching step for '%s'" name))
     (when (string-match (car matching) name)
       (let ((i 1))
         (while (match-string i name)
