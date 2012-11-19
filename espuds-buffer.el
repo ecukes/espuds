@@ -28,10 +28,10 @@
 (Then "^I should be in file \"\\(.+\\)\"$"
       (lambda (file)
         (let ((file-name (buffer-file-name)))
-          (assert file-name nil "Expected file to be '%s', but not visiting any file." file)
-          (let ((match (string-match-p (concat file "$") file-name)))
-            (assert match nil "Expected file to be '%s', but was '%s'." file file-name)))))
-
+          (if file-name
+              (let ((match (equal file (file-name-nondirectory file-name))))
+                (assert match nil "Expected file to be '%s', but was '%s'." file file-name))
+            (assert file-name nil "Expected file to be '%s', but not visiting any file." file)))))
 
 ;; Clears all text in the current buffer.
 ;;
