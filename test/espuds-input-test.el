@@ -28,11 +28,12 @@
 
 (ert-deftest when-i-press-chain-inactive ()
   "Should execute macro when chaining inactive."
-  (let ((espuds-chain-active nil))
-    (with-mock
-     (stub edmacro-parse-keys => "C-a")
-     (mock (execute-kbd-macro "C-a"))
-     (When "I press \"C-a\""))))
+  (with-playground
+   (let ((espuds-chain-active nil))
+     (insert "foo")
+     (should (equal (point) 4))
+     (When "I press \"C-a\"")
+     (should (equal (point) 1)))))
 
 (ert-deftest when-i-press-c-g-bound-to-keyboard-quit ()
   "Should quit when pressing C-g and it's bound to `keyboard-quit'."
@@ -51,6 +52,29 @@
      (stub key-binding => 'ignore)
      (mock (execute-kbd-macro "C-g"))
      (When "I press \"C-g\""))))
+
+(ert-deftest when-i-press-c-y ()
+  "Should yank."
+  (let ((kill-ring (list "bar")))
+    (with-playground
+     (insert "foo")
+     (When "I press \"C-y\"")
+     (should (equal (buffer-string) "foobar")))))
+
+(ert-deftest when-i-press-c-y-then-m-y ()
+  "Should yank pop."
+  (with-playground
+   (insert "foo")
+   (let ((kill-ring (list "foo" "bar")))
+     (When "I press \"C-y\"")
+     (And  "I press \"M-y\"")
+     (should (equal (buffer-string) "foofoo")))))
+
+(ert-deftest when-i-press-previous-keyboard-input ()
+  "Should set previous keyboard input."
+  (let ((espuds-previous-keyboard-input))
+    (When "I press \"C-a\"")
+    (should (equal espuds-previous-keyboard-input "C-a"))))
 
 (ert-deftest when-i-quit ()
   "Should quit."
