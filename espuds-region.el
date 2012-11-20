@@ -3,7 +3,7 @@
 
 ;; Deactivates mark.
 ;;
-;; Usage:
+;; Example:
 ;;   Given there is no region selected
 (Given "^there is no region selected$"
        (lambda ()
@@ -11,7 +11,7 @@
 
 ;; Activates transient mark mode.
 ;;
-;; Usage:
+;; Example:
 ;;   Given transient mark mode is active
 ;;   Given transient mark mode is inactive
 (Given "^transient mark mode is \\(active\\|inactive\\)$"
@@ -21,7 +21,7 @@
 
 ;; Sets the mark at point.
 ;;
-;; Usage:
+;; Example:
 ;;   When I set the mark
 (When "^I set the mark$"
       (lambda ()
@@ -29,7 +29,7 @@
 
 ;; Pop and move point to the top position on the mark-ring
 ;;
-;; Usage:
+;; Example:
 ;;   When I pop the mark
 (When "^I pop the mark$"
       (lambda ()
@@ -37,7 +37,7 @@
 
 ;; Asserts that the selected region is same as EXPECTED.
 ;;
-;; Usage:
+;; Example:
 ;;   Then the region should be "REGION"
 ;;
 ;;   Then the region should be:
@@ -52,7 +52,7 @@
 
 ;; Asserts that the region is not active.
 ;;
-;; Usage:
+;; Example:
 ;;   Then the region should not be active
 (Then "^the region should not be active$"
       (lambda ()

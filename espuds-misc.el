@@ -2,7 +2,7 @@
 
 ;; Turns on some mode.
 ;;
-;; Usage:
+;; Example:
 ;;   When I turn on ruby-mode
 (When "^I turn on \\(.+\\)$"
       (lambda (mode)
@@ -11,7 +11,7 @@
 
 ;; Set some variable
 ;;
-;; Usage:
+;; Example:
 ;;   When I set sentence-end-double-space to nil
 (When "^I set \\(.+\\) to \\(.+\\)$"
       (lambda (var val)
@@ -19,7 +19,7 @@
 
 ;; Loads CONTENTS with Emacs load command.
 ;;
-;; Usage:
+;; Example:
 ;;   When I load the following:
 ;;   """
 ;;   CONTENTS
@@ -30,7 +30,7 @@
 
 ;; Creates a new temp file called FILE and opens it.
 ;;
-;; Usage:
+;; Example:
 ;;   When I open temp file "SOME FILE"
 (When "^I open temp file \"\\(.+\\)\"$"
       (lambda (file)
@@ -38,7 +38,7 @@
 
 ;; Asserts that MESSAGE has been printed.
 ;;
-;; Usage:
+;; Example:
 ;;   Then I should see message "MESSAGE"
 (Then "^I should see message \"\\(.+\\)\"$"
       (lambda (message)

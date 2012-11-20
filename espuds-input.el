@@ -10,7 +10,7 @@
 
 ;; Starts an action chain.
 ;;
-;; Usage:
+;; Example:
 ;;   When I start an action chain
 (When "^I start an action chain$"
       (lambda ()
@@ -19,7 +19,7 @@
 
 ;; Executes the action chain.
 ;;
-;; Usage:
+;; Example:
 ;;   When I execute the action chain
 (When "^I execute the action chain$"
       (lambda ()
@@ -29,7 +29,7 @@
 ;; If action chaining is active. Add KEYBINDING to the action
 ;; chain. Otherwise execute the function that KEYBINDING is bound to.
 ;;
-;; Usage:
+;; Example:
 ;;   When I press "C-h e"
 (When "^I press \"\\(.+\\)\"$"
       (lambda (keybinding)
@@ -43,14 +43,14 @@
 
 ;; Quit without signal.
 ;;
-;; Usage:
+;; Example:
 ;;   When I quit
 (When "^I quit$" 'espuds-quit)
 
 ;; If action chaining is active. Add TYPING to the action
 ;; chain. Otherwise simulate the TYPING.
 ;;
-;; Usage:
+;; Example:
 ;;   When I type "TYPING"
 (When "^I type \"\\(.+\\)\"$"
        (lambda (typing)

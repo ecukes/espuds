@@ -3,7 +3,7 @@
 
 ;; Switches to BUFFER.
 ;;
-;; Usage:
+;; Example:
 ;;   When I switch to buffer "Foo"
 ;;   Given I am in buffer "*scratch*"
 (Given "^\\(?:I am in buffer\\|I switch to buffer\\) \"\\(.+\\)\"$"
@@ -13,7 +13,7 @@
 
 ;; Asserts that the current buffer is BUFFER.
 ;;
-;; Usage:
+;; Example:
 ;;   Then I should be in buffer "*scratch*"
 (Then "^I should be in buffer \"\\(.+\\)\"$"
       (lambda (buffer)
@@ -23,7 +23,7 @@
 
 ;; Asserts that the current buffer is connected to FILE.
 ;;
-;; Usage:
+;; Example:
 ;;   Then I should be in file "/path/to/some/file"
 (Then "^I should be in file \"\\(.+\\)\"$"
       (lambda (file)
@@ -35,7 +35,7 @@
 
 ;; Clears all text in the current buffer.
 ;;
-;; Usage:
+;; Example:
 ;;   Given the buffer is empty
 ;;   When I clear the buffer
 (Given "^the buffer is empty$\\|^I clear the buffer$"

@@ -3,7 +3,7 @@
 
 ;; Goes to LINE if it exist.
 ;;
-;; Usage:
+;; Example:
 ;;   When I go to line "12"
 (When "^I go to line \"\\([0-9]+\\)\"$"
       (lambda (line)
@@ -15,7 +15,7 @@
 
 ;; Goes to POINT if it exist.
 ;;
-;; Usage:
+;; Example:
 ;;   When I go to point "12"
 (When "^I go to point \"\\([0-9]+\\)\"$"
       (lambda (point)
@@ -27,7 +27,7 @@
 
 ;; Go to WORD if it exist.
 ;;
-;; Usage:
+;; Example:
 ;;   When I go to word "SOME WORD"
 (When "^I go to word \"\\(.+\\)\"$"
       (lambda (word)
@@ -39,7 +39,7 @@
 
 ;; Checks that the cursor is at a specific position.
 ;;
-;; Usage:
+;; Example:
 ;;   Then the cursor should be at point "12"
 (Then "^the cursor should be at point \"\\(.+\\)\"$"
       (lambda (point)
@@ -48,7 +48,7 @@
 
 ;; Checks that the cursor is before some text.
 ;;
-;; Usage:
+;; Example:
 ;;   Then the cursor should be before "Foo"
 (Then "^the cursor should be before \"\\(.+\\)\"$"
       (lambda (expected)
@@ -60,7 +60,7 @@
 
 ;; Checks that the cursor is after some text.
 ;;
-;; Usage:
+;; Example:
 ;;   Then the cursor should be after "Foo"
 (Then "^the cursor should be after \"\\(.+\\)\"$"
       (lambda (expected)
@@ -72,7 +72,7 @@
 
 ;; Checks that the cursor is between some text.
 ;;
-;; Usage:
+;; Example:
 ;;   Then the cursor should be between "Foo" and "Bar"
 (Then "^the cursor should be between \"\\(.+\\)\" and \"\\(.+\\)\"$"
       (lambda (left right)
@@ -93,7 +93,7 @@
 
 ;; Places the cursor between text.
 ;;
-;; Usage:
+;; Example:
 ;;   When I place the cursor between "Foo" and "Bar"
 (When "^I place the cursor between \"\\(.+\\)\" and \"\\(.+\\)\"$"
       (lambda (left right)
@@ -105,7 +105,7 @@
 
 ;; Places the cursor before first instance of text.
 ;;
-;; Usage:
+;; Example:
 ;;   When I place the cursor before "Foo"
 (When "^I place the cursor before \"\\(.+\\)\"$"
       (lambda (arg)
@@ -117,7 +117,7 @@
 
 ;; Places the cursor after first instance of text.
 ;;
-;; Usage:
+;; Example:
 ;;   When I place the cursor after "Foo"
 (When "^I place the cursor after \"\\(.+\\)\"$"
       (lambda (arg)
@@ -128,25 +128,25 @@
 
 ;; Places the cursor at the beginning of buffer.
 ;;
-;; Usage:
+;; Example:
 ;;   When I go to beginning of buffer
 (When "^I go to beginning of buffer$" 'beginning-of-buffer)
 
 ;; Places the cursor at the end of buffer.
 ;;
-;; Usage:
+;; Example:
 ;;   When I go to end of buffer
 (When "^I go to end of buffer$" 'end-of-buffer)
 
 ;; Places the cursor at the beginning of the line.
 ;;
-;; Usage:
+;; Example:
 ;;   When I go to beginning of line
 (When "^I go to beginning of line$" 'move-beginning-of-line)
 
 ;; Places the cursor at the end of the line.
 ;;
-;; Usage:
+;; Example:
 ;;   When I go to end of line
 (When "^I go to end of line$" 'move-end-of-line)
 
