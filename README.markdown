@@ -10,7 +10,7 @@ Espuds is a collection of the most commonly used step definitions.
 
 
 ## Usage
-To use Espuds, you have load it in your **features/support.el** file.
+To use Espuds, you have load it in your `features/support.el` file.
     (add-to-list 'load-path "/path/to/espuds)
     (require 'espuds)
     
@@ -28,6 +28,7 @@ Some actions require more than one keyboard input. For example
 functions that reads input via the minibuffer (not via interactive).
 
 To handle such cases, you wrap the actions in a block. For example:
+
     Scenario: Activate linum mode
       Given I start an action chain
       And I press "M-x"
@@ -36,6 +37,15 @@ To handle such cases, you wrap the actions in a block. For example:
       Then linum-mode should be active
 
 ## Contributing
-We all test different kind of applications. It is therefore important
-that you contribute the step definitions you find useful. Send me an
-email, a pm, a pull request or create an issue with your improvement.
+Contribution is much welcome!. When adding new features, please write
+tests for them!
+
+Install [carton](https://github.com/rejeep/carton) if you haven't
+already, then:
+
+    $ cd /path/to/espuds
+    $ carton
+
+Run all tests with:
+
+    $ make
