@@ -56,5 +56,4 @@
   "Should see message when exists."
   (with-mock
    (stub search => 0)
-   (mock (assert 0 nil "Expected '%s' to be included in the list of printed messages, but was not." "MESSAGE"))
    (Then "I should see message \"MESSAGE\"")))

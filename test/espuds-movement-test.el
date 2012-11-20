@@ -79,12 +79,9 @@
 (ert-deftest then-the-cursor-should-be-at-point-exists-and-at-point ()
   "Should be at point when at point."
   (with-playground
-   (with-mock
-    (insert "foo bar baz")
-    (mock
-     (assert t nil "Expected cursor to be at point '%s', but was at '%s'" "3" 3))
-    (goto-char 3)
-    (Then "the cursor should be at point \"3\""))))
+   (insert "foo bar baz")
+   (goto-char 3)
+   (Then "the cursor should be at point \"3\"")))
 
 (ert-deftest then-the-cursor-should-be-before-is-not-before ()
   "Should not be before word when not before."
@@ -99,12 +96,9 @@
 (ert-deftest then-the-cursor-should-be-before-is-before ()
   "Should be before word when before."
   (with-playground
-   (with-mock
-    (insert "foo bar baz")
-    (mock
-     (assert t nil "Expected '%s' to be before point but was '%s'." "bar" "bar b"))
-    (goto-char 5)
-    (Then "the cursor should be before \"bar\""))))
+   (insert "foo bar baz")
+   (goto-char 5)
+   (Then "the cursor should be before \"bar\"")))
 
 (ert-deftest then-the-cursor-should-be-after-is-not-after ()
   "Should not be after word when not after."
@@ -119,12 +113,9 @@
 (ert-deftest then-the-cursor-should-be-after-is-after ()
   "Should be after word when after."
   (with-playground
-   (with-mock
-    (insert "foo bar baz")
-    (mock
-     (assert t nil "Expected '%s' to be after point but was '%s'." "bar" "o bar"))
-    (goto-char 8)
-    (Then "the cursor should be after \"bar\""))))
+   (insert "foo bar baz")
+   (goto-char 8)
+   (Then "the cursor should be after \"bar\"")))
 
 (ert-deftest then-the-cursor-should-be-between-is-not-between ()
   "Should not be between when not between."
@@ -139,12 +130,9 @@
 (ert-deftest then-the-cursor-should-be-between-is-between ()
   "Should be between when between."
   (with-playground
-   (with-mock
-    (insert "foobarbaz")
-    (mock
-     (assert t nil "Expected '%s' to be left of point and '%s' to be right of point, but was: '%s[CURSOR]%s'" "foo" "bar" "foo" "barba"))
-    (goto-char 4)
-    (Then "the cursor should be between \"foo\" and \"bar\""))))
+   (insert "foobarbaz")
+   (goto-char 4)
+   (Then "the cursor should be between \"foo\" and \"bar\"")))
 
 (ert-deftest then-the-cursor-should-be-before-is-not-before ()
   "Should not be before when not before."
@@ -159,12 +147,9 @@
 (ert-deftest then-the-cursor-should-be-before-is-before ()
   "Should be before when before."
   (with-playground
-   (with-mock
-    (insert "foobarbaz")
-    (mock
-     (assert t nil "Expected '%s' to be before point but was '%s'." "bar" "barba"))
-    (goto-char 4)
-    (Then "the cursor should be before \"bar\""))))
+   (insert "foobarbaz")
+   (goto-char 4)
+   (Then "the cursor should be before \"bar\"")))
 
 (ert-deftest then-the-cursor-should-be-after-is-not-after ()
   "Should not be after when not after."
@@ -179,12 +164,9 @@
 (ert-deftest then-the-cursor-should-be-after-is-after ()
   "Should be after when after."
   (with-playground
-   (with-mock
-    (insert "foobarbaz")
-    (mock
-     (assert t nil "Expected '%s' to be after point but was '%s'." "bar" "oobar"))
-    (goto-char 7)
-    (Then "the cursor should be after \"bar\""))))
+   (insert "foobarbaz")
+   (goto-char 7)
+   (Then "the cursor should be after \"bar\"")))
 
 (ert-deftest when-i-go-to-beginning-of-buffer ()
   "Should go to beginning of buffer."

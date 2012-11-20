@@ -34,8 +34,6 @@
   "Should be region."
   (with-mock
    (stub espuds-region => "REGION")
-   (mock
-    (assert t nil "Expected the region to be '%s', but was '%s'." "REGION" "REGION"))
    (Then "the region should be \"REGION\"")))
 
 (ert-deftest then-the-region-should-be-arg-no-region ()
@@ -58,8 +56,6 @@
   "Should be region."
   (with-mock
    (stub espuds-region => "REGION")
-   (mock
-    (assert t nil "Expected the region to be '%s', but was '%s'." "REGION" "REGION"))
    (Then "the region should be:" "REGION")))
 
 (ert-deftest then-the-region-should-be-arg-no-region ()
@@ -90,6 +86,4 @@
   "Should not have active region."
   (with-mock
    (stub region-active-p => nil)
-   (mock
-    (assert t nil "Expected the region not to be active, but it was."))
    (Then "the region should not be active")))

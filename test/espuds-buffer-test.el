@@ -48,8 +48,6 @@
   "Should not be in file when same file."
   (with-mock
    (stub buffer-file-name => "/path/to/foo")
-   (mock
-    (assert t nil "Expected file to be '%s', but was '%s'." "foo" "/path/to/foo"))
    (Then "I should be in file \"foo\"")))
 
 (ert-deftest given-the-buffer-is-empty ()
