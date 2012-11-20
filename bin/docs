@@ -80,7 +80,7 @@
                   (description (spud-description spud))
                   (examples (spud-examples spud)))
               (concat
-               "**" description "**\n\n"
+               "### " description "\n\n"
                "Pattern:" "\n\n"
                "    " "(" head " " regex " ...)\n\n"
                "Examples:" "\n\n"
