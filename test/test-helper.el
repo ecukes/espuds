@@ -33,8 +33,8 @@
     (apply (cdr matching) (or args matches))))
 
 (defmacro with-playground (&rest body)
-  `(save-excursion
-     (save-restriction
-       (set-buffer (get-buffer-create "*espuds*"))
-       (erase-buffer)
-       ,@body)))
+  `(let ((buffer-name "*espuds*"))
+     (if (get-buffer buffer-name)
+         (kill-buffer buffer-name))
+     (switch-to-buffer (get-buffer-create buffer-name))
+     ,@body))
