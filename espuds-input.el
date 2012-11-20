@@ -7,6 +7,9 @@
 (defvar espuds-chain-active nil
   "Is t if chaining is active, nil otherwise.")
 
+(defvar espuds-previous-keyboard-input nil
+  "Previous input command (keybinding).")
+
 
 ;; Starts an action chain.
 ;;
@@ -33,13 +36,19 @@
 ;;   When I press "C-h e"
 (When "^I press \"\\(.+\\)\"$"
       (lambda (keybinding)
+        (when (and
+               (equal espuds-previous-keyboard-input "C-y")
+               (equal keybinding "M-y")
+               (eq (key-binding (kbd "M-y")) 'yank-pop))
+          (setq this-command 'yank))
         (let ((macro (edmacro-parse-keys keybinding)))
           (if espuds-chain-active
               (setq espuds-action-chain (vconcat espuds-action-chain macro))
             (if (and (equal keybinding "C-g")
                      (eq (key-binding (kbd "C-g")) 'keyboard-quit))
                 (espuds-quit)
-              (execute-kbd-macro macro))))))
+              (execute-kbd-macro macro))))
+        (setq espuds-previous-keyboard-input keybinding)))
 
 ;; Quit without signal.
 ;;
@@ -53,10 +62,10 @@
 ;; Example:
 ;;   When I type "TYPING"
 (When "^I type \"\\(.+\\)\"$"
-       (lambda (typing)
-         (if espuds-chain-active
-             (setq espuds-action-chain (vconcat espuds-action-chain (string-to-vector typing)))
-           (execute-kbd-macro (string-to-vector typing)))))
+      (lambda (typing)
+        (if espuds-chain-active
+            (setq espuds-action-chain (vconcat espuds-action-chain (string-to-vector typing)))
+          (execute-kbd-macro (string-to-vector typing)))))
 
 
 (provide 'espuds-input)
