@@ -2,25 +2,25 @@
 
 (ert-deftest when-i-insert-arg ()
   "Should insert arg."
-  (with-setup
+  (with-playground
    (When "I insert \"foo\"")
    (should (equal (buffer-string) "foo"))))
 
 (ert-deftest when-i-insert-py-string ()
   "Should insert py string."
-  (with-setup
+  (with-playground
    (When "I insert:" "bar")
    (should (equal (buffer-string) "bar"))))
 
 (ert-deftest then-i-should-see-when-exists-arg ()
   "Should see when exists (arg)."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (Then "I should see \"bar\"")))
 
 (ert-deftest then-i-should-see-does-not-exist-arg ()
   "Should not see when not exist (arg)."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -29,13 +29,13 @@
 
 (ert-deftest then-i-should-see-when-exists-py-string ()
   "Should see when exists (py-string)."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (Then "I should see:" "bar")))
 
 (ert-deftest then-i-should-see-does-not-exist-py-string ()
   "Should not see when not exist (py-string)."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -44,13 +44,13 @@
 
 (ert-deftest then-i-should-not-see-does-not-exist-arg ()
   "Should not see when not exist (arg)."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (Then "I should not see \"qux\"")))
 
 (ert-deftest then-i-should-not-see-when-exists-arg ()
   "should see when exists (arg)."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -59,13 +59,13 @@
 
 (ert-deftest then-i-should-not-see-does-not-exist-py-string ()
   "Should not see when not exist (py-string)."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (Then "I should not see:" "qux")))
 
 (ert-deftest then-i-should-not-see-when-exists-py-string ()
   "should see when exists (py-string)."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -74,13 +74,13 @@
 
 (ert-deftest then-i-should-see-pattern-when-exists-arg ()
   "Should see pattern when exists (arg)."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (Then "I should see pattern \"\\(.\\)\\1\"")))
 
 (ert-deftest then-i-should-see-pattern-does-not-exist-arg ()
   "Should not see pattern when not exist (arg)."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -89,13 +89,13 @@
 
 (ert-deftest then-i-should-see-pattern-when-exists-py-string ()
   "Should see pattern when exists (py-string)."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (Then "I should see pattern:" "\\(.\\)\\1")))
 
 (ert-deftest then-i-should-see-pattern-does-not-exist-py-string ()
   "Should not see pattern when not exist (py-string)."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -104,13 +104,13 @@
 
 (ert-deftest then-i-should-not-see-pattern-does-not-exist-arg ()
   "Should not see pattern when not exist (arg)."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (Then "I should not see pattern \"\\(.\\)\\1\\1\"")))
 
 (ert-deftest then-i-should-not-see-pattern-when-exists-arg ()
   "Should not see pattern when exists (arg)."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -119,13 +119,13 @@
 
 (ert-deftest then-i-should-not-see-pattern-does-not-exist-py-string ()
   "Should not see pattern when not exist (py-string)."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (Then "I should not see pattern:" "qux")))
 
 (ert-deftest then-i-should-not-see-pattern-when-exists-py-string ()
   "Should not see pattern when exists (py-string)."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -134,7 +134,7 @@
 
 (ert-deftest when-i-select-does-not-exist ()
   "Should not select when not exist."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (stub re-search-backward)
@@ -144,7 +144,7 @@
 
 (ert-deftest when-i-select-does-exists ()
   "Should select when exists."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (When "I select \"bar\"")
@@ -153,7 +153,7 @@
 
 (ert-deftest then-i-should-not-see-anything-when-content ()
   "Should see when content."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo")
     (mock
@@ -162,12 +162,12 @@
 
 (ert-deftest then-i-should-not-see-anything-when-no-content ()
   "Should not see when no content."
-  (with-setup
+  (with-playground
    (Then "I should not see anything")))
 
 (ert-deftest then-the-buffer-should-be-empty-when-content ()
   "Should see when content."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo")
     (mock
@@ -176,5 +176,5 @@
 
 (ert-deftest then-the-buffer-should-be-empty-when-no-content ()
   "Should not see when no content."
-  (with-setup
+  (with-playground
    (Then "the buffer should be empty")))

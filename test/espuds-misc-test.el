@@ -2,13 +2,13 @@
 
 (ert-deftest when-i-turn-on-major-mode ()
   "Should turn on major mode."
-  (with-setup
+  (with-playground
    (When "I turn on text-mode")
    (should (equal major-mode 'text-mode))))
 
 (ert-deftest when-i-turn-on-minor-mode ()
   "Should turn on minor mode."
-  (with-setup
+  (with-playground
    (with-mock
     (stub message)
     (When "I turn on longlines-mode"))

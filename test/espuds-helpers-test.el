@@ -2,7 +2,7 @@
 
 (ert-deftest fake-eval ()
   "Should fake eval."
-  (with-setup
+  (with-playground
    (with-mock
     (stub make-temp-file => "/tmp/espuds-xyz")
     (mock (load "/tmp/espuds-xyz"))
@@ -11,13 +11,13 @@
 
 (ert-deftest buffer-contents ()
   "Should return buffer content."
-  (with-setup
+  (with-playground
    (insert "CONTENT")
    (should (equal (espuds-buffer-contents) "CONTENT"))))
 
 (ert-deftest region-mark-active ()
   "Should return region when mark active."
-  (with-setup
+  (with-playground
    (insert "CONTENT")
    (let ((mark-active t))
      (with-mock

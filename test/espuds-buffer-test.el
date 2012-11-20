@@ -2,26 +2,26 @@
 
 (ert-deftest given-i-am-in-buffer ()
   "Should switch to buffer."
-  (with-setup
+  (with-playground
    (Given "I am in buffer \"foo\"")
    (should (equal (buffer-name) "foo"))))
 
 (ert-deftest given-i-switch-to-buffer ()
   "Should switch to buffer."
-  (with-setup
+  (with-playground
    (Given "I switch to buffer \"foo\"")
    (should (equal (buffer-name) "foo"))))
 
 (ert-deftest then-i-should-be-in-buffer-correct ()
   "Should be in buffer."
-  (with-setup
+  (with-playground
    (let ((buffer "foo"))
      (Given "I switch to buffer \"%s\"" buffer)
      (Then "I should be in buffer \"%s\"" buffer))))
 
 (ert-deftest then-i-should-be-in-buffer-not-same ()
   "Should not be in buffer."
-  (with-setup
+  (with-playground
    (with-mock
     (stub buffer-name => "bar")
     (mock
@@ -54,14 +54,14 @@
 
 (ert-deftest given-the-buffer-is-empty ()
   "Should erase buffer."
-  (with-setup
+  (with-playground
    (insert "CONTENT")
    (Given "the buffer is empty")
    (should (equal (buffer-string) ""))))
 
 (ert-deftest given-i-clear-the-buffer ()
   "Should erase buffer."
-  (with-setup
+  (with-playground
    (insert "CONTENT")
    (Given "I clear the buffer")
    (should (equal (buffer-string) ""))))

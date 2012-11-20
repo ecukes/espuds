@@ -32,7 +32,7 @@
             (setq i (1+ i))))))
     (apply (cdr matching) (or args matches))))
 
-(defmacro with-setup (&rest body)
+(defmacro with-playground (&rest body)
   `(save-excursion
      (save-restriction
        (set-buffer (get-buffer-create "*espuds*"))

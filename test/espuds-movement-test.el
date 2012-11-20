@@ -2,7 +2,7 @@
 
 (ert-deftest when-i-go-to-line-does-not-exist ()
   "Should not go to line when does not exist."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo\nbar\nbaz")
     (stub goto-line)
@@ -12,7 +12,7 @@
 
 (ert-deftest when-i-go-to-line-exists ()
   "Should go to line when exists."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo\nbar\nbaz")
     (mock (goto-line 2))
@@ -20,7 +20,7 @@
 
 (ert-deftest when-i-go-to-point-does-not-exist ()
   "Should not go to point when does not exist."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foobarbaz")
     (stub goto-char)
@@ -30,7 +30,7 @@
 
 (ert-deftest when-i-go-to-point-exists ()
   "Should go to point when exists."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foobarbaz")
     (mock (goto-char 5))
@@ -38,7 +38,7 @@
 
 (ert-deftest when-i-go-to-word-does-not-exist ()
   "Should not go to word when does not exist."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (stub backward-char)
@@ -48,7 +48,7 @@
 
 (ert-deftest when-i-go-to-word-exists ()
   "Should go to point when exists."
-  (with-setup
+  (with-playground
    (insert "foo bar baz")
    (When "I go to word \"bar\"")
    (should (equal (point) 5))))
@@ -59,7 +59,7 @@
 
 (ert-deftest then-the-cursor-should-be-at-point-does-not-exist ()
   "Should not be at point when point does not exist."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -68,7 +68,7 @@
 
 (ert-deftest then-the-cursor-should-be-at-point-exists-but-not-at-point ()
   "Should not be at point when not at point."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -78,7 +78,7 @@
 
 (ert-deftest then-the-cursor-should-be-at-point-exists-and-at-point ()
   "Should be at point when at point."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -88,7 +88,7 @@
 
 (ert-deftest then-the-cursor-should-be-before-is-not-before ()
   "Should not be before word when not before."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -98,7 +98,7 @@
 
 (ert-deftest then-the-cursor-should-be-before-is-before ()
   "Should be before word when before."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -108,7 +108,7 @@
 
 (ert-deftest then-the-cursor-should-be-after-is-not-after ()
   "Should not be after word when not after."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -118,7 +118,7 @@
 
 (ert-deftest then-the-cursor-should-be-after-is-after ()
   "Should be after word when after."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foo bar baz")
     (mock
@@ -128,7 +128,7 @@
 
 (ert-deftest then-the-cursor-should-be-between-is-not-between ()
   "Should not be between when not between."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foobarbaz")
     (mock
@@ -138,7 +138,7 @@
 
 (ert-deftest then-the-cursor-should-be-between-is-between ()
   "Should be between when between."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foobarbaz")
     (mock
@@ -148,7 +148,7 @@
 
 (ert-deftest then-the-cursor-should-be-before-is-not-before ()
   "Should not be before when not before."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foobarbaz")
     (mock
@@ -158,7 +158,7 @@
 
 (ert-deftest then-the-cursor-should-be-before-is-before ()
   "Should be before when before."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foobarbaz")
     (mock
@@ -168,7 +168,7 @@
 
 (ert-deftest then-the-cursor-should-be-after-is-not-after ()
   "Should not be after when not after."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foobarbaz")
     (mock
@@ -178,7 +178,7 @@
 
 (ert-deftest then-the-cursor-should-be-after-is-after ()
   "Should be after when after."
-  (with-setup
+  (with-playground
    (with-mock
     (insert "foobarbaz")
     (mock
@@ -188,28 +188,28 @@
 
 (ert-deftest when-i-go-to-beginning-of-buffer ()
   "Should go to beginning of buffer."
-  (with-setup
+  (with-playground
    (with-mock
     (mock (beginning-of-buffer))
     (When "I go to beginning of buffer"))))
 
 (ert-deftest when-i-go-to-end-of-buffer ()
   "Should go to end of buffer."
-  (with-setup
+  (with-playground
    (with-mock
     (mock (end-of-buffer))
     (When "I go to end of buffer"))))
 
 (ert-deftest when-i-go-to-beginning-of-line ()
   "Should go to beginning of line."
-  (with-setup
+  (with-playground
    (with-mock
     (mock (move-beginning-of-line))
     (When "I go to beginning of line"))))
 
 (ert-deftest when-i-go-to-end-of-line ()
   "Should go to end of line."
-  (with-setup
+  (with-playground
    (with-mock
     (mock (move-end-of-line))
     (When "I go to end of line"))))
