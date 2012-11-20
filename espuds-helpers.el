@@ -3,7 +3,7 @@
 
 (defun espuds-fake-eval (contents)
   "Dump contents to a temp file and then load it."
-  (let ((file (make-temp-file "ecukes-")))
+  (let ((file (make-temp-file "espuds-")))
     (with-temp-file file
       (insert contents))
     (load file)))

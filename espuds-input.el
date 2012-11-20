@@ -1,7 +1,7 @@
 ;;; espuds-input.el --- Input related definitions
 
 
-(defvar espuds-action-chain '()
+(defvar espuds-action-chain nil
   "List of actions to execute.")
 
 (defvar espuds-chain-active nil
@@ -14,7 +14,7 @@
 ;;   When I start an action chain
 (When "^I start an action chain$"
       (lambda ()
-        (setq espuds-action-chain '())
+        (setq espuds-action-chain nil)
         (setq espuds-chain-active t)))
 
 ;; Executes the action chain.
@@ -52,7 +52,7 @@
 ;;
 ;; Usage:
 ;;   When I type "TYPING"
-(Given "^I type \"\\(.+\\)\"$"
+(When "^I type \"\\(.+\\)\"$"
        (lambda (typing)
          (if espuds-chain-active
              (setq espuds-action-chain (vconcat espuds-action-chain (string-to-vector typing)))
