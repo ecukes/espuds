@@ -16,11 +16,6 @@ To use Espuds, you have load it in your `features/support.el` file.
     
 Thats it!
 
-
-## Step Docs
-
-STEP-DEFINITION-DOCS
-
 ## Gotchas
 
 ### Action Chain
@@ -49,3 +44,7 @@ already, then:
 Run all tests with:
 
     $ make
+
+## Docs
+
+STEP-DEFINITION-DOCS
