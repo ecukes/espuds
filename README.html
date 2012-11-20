@@ -1,0 +1,571 @@
+<h1>Espuds - Ecukes step definitions</h1>
+
+<p>First of all. If you don't know what
+<a href="http://github.com/rejeep/ecukes">Ecukes</a> it, go read up about it. If
+you have, you should know that in order to test with Ecukes, you need
+to translate your steps so that Emacs understands them. You do that
+with step definitions.</p>
+
+<p>Espuds is a collection of the most commonly used step definitions.</p>
+
+<h2>Usage</h2>
+
+<p>To use Espuds, you have load it in your <code>features/support.el</code> file.</p>
+
+<pre><code>(add-to-list 'load-path "/path/to/espuds)
+(require 'espuds)
+</code></pre>
+
+<p>Thats it!</p>
+
+<h2>Step Docs</h2>
+
+<p><strong>Switches to BUFFER.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^\\(?:I am in buffer\\|I switch to buffer\\) \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I switch to buffer "Foo"
+Given I am in buffer "*scratch*"
+</code></pre>
+
+<p><strong>Asserts that the current buffer is BUFFER.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I should be in buffer \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then I should be in buffer "*scratch*"
+</code></pre>
+
+<p><strong>Asserts that the current buffer is connected to FILE.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I should be in file \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then I should be in file "/path/to/some/file"
+</code></pre>
+
+<p><strong>Clears all text in the current buffer.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^the buffer is empty$\\|^I clear the buffer$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Given the buffer is empty
+When I clear the buffer
+</code></pre>
+
+<p><strong>Starts an action chain.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I start an action chain$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I start an action chain
+</code></pre>
+
+<p><strong>Executes the action chain.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I execute the action chain$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I execute the action chain
+</code></pre>
+
+<p><strong>If action chaining is active. Add KEYBINDING to the actionchain. Otherwise execute the function that KEYBINDING is bound to.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I press \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I press "C-h e"
+</code></pre>
+
+<p><strong>Quit without signal.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I quit$" 'espuds-quit)
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I quit
+</code></pre>
+
+<p><strong>If action chaining is active. Add TYPING to the actionchain. Otherwise simulate the TYPING.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I type \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I type "TYPING"
+</code></pre>
+
+<p><strong>Turns on some mode.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I turn on \\(.+\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I turn on ruby-mode
+</code></pre>
+
+<p><strong>Set some variable</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I set \\(.+\\) to \\(.+\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I set sentence-end-double-space to nil
+</code></pre>
+
+<p><strong>Loads CONTENTS with Emacs load command.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I load the following:$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I load the following:
+CONTENTS
+"""
+</code></pre>
+
+<p><strong>Creates a new temp file called FILE and opens it.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I open temp file \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I open temp file "SOME FILE"
+</code></pre>
+
+<p><strong>Asserts that MESSAGE has been printed.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I should see message \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then I should see message "MESSAGE"
+</code></pre>
+
+<p><strong>Goes to LINE if it exist.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I go to line \"\\([0-9]+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I go to line "12"
+</code></pre>
+
+<p><strong>Goes to POINT if it exist.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I go to point \"\\([0-9]+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I go to point "12"
+</code></pre>
+
+<p><strong>Go to WORD if it exist.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I go to word \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I go to word "SOME WORD"
+</code></pre>
+
+<p><strong>Checks that the cursor is at a specific position.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^the cursor should be at point \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then the cursor should be at point "12"
+</code></pre>
+
+<p><strong>Checks that the cursor is before some text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^the cursor should be before \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then the cursor should be before "Foo"
+</code></pre>
+
+<p><strong>Checks that the cursor is after some text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^the cursor should be after \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then the cursor should be after "Foo"
+</code></pre>
+
+<p><strong>Checks that the cursor is between some text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^the cursor should be between \"\\(.+\\)\" and \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then the cursor should be between "Foo" and "Bar"
+</code></pre>
+
+<p><strong>Places the cursor between text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I place the cursor between \"\\(.+\\)\" and \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I place the cursor between "Foo" and "Bar"
+</code></pre>
+
+<p><strong>Places the cursor before first instance of text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I place the cursor before \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I place the cursor before "Foo"
+</code></pre>
+
+<p><strong>Places the cursor after first instance of text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I place the cursor after \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I place the cursor after "Foo"
+</code></pre>
+
+<p><strong>Places the cursor at the beginning of buffer.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I go to beginning of buffer$" 'beginning-of-buffer)
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I go to beginning of buffer
+</code></pre>
+
+<p><strong>Places the cursor at the end of buffer.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I go to end of buffer$" 'end-of-buffer)
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I go to end of buffer
+</code></pre>
+
+<p><strong>Places the cursor at the beginning of the line.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I go to beginning of line$" 'move-beginning-of-line)
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I go to beginning of line
+</code></pre>
+
+<p><strong>Places the cursor at the end of the line.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I go to end of line$" 'move-end-of-line)
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I go to end of line
+</code></pre>
+
+<p><strong>Deactivates mark.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^there is no region selected$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Given there is no region selected
+</code></pre>
+
+<p><strong>Activates transient mark mode.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^transient mark mode is \\(active\\|inactive\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Given transient mark mode is active
+Given transient mark mode is inactive
+</code></pre>
+
+<p><strong>Sets the mark at point.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I set the mark$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I set the mark
+</code></pre>
+
+<p><strong>Pop and move point to the top position on the mark-ring</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I pop the mark$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I pop the mark
+</code></pre>
+
+<p><strong>Asserts that the selected region is same as EXPECTED.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^the region should be\\(?: \"\\(.*\\)\"\\|:\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then the region should be "REGION"
+Then the region should be:
+REGION
+"""
+</code></pre>
+
+<p><strong>Asserts that the region is not active.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^the region should not be active$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then the region should not be active
+</code></pre>
+
+<p><strong>Inserts CONTENTS into the current buffer.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I insert\\(?: \"\\(.+\\)\"\\|:\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I insert "CONTENTS"
+When I insert:
+CONTENTS
+"""
+</code></pre>
+
+<p><strong>Asserts that the current buffer includes some text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I should see\\(?: \"\\(.+\\)\"\\|:\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then I should see "CONTENTS"
+Then I should see:
+CONTENTS
+"""
+</code></pre>
+
+<p><strong>Asserts that the current buffer does not include some text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I should not see\\(?: \"\\(.+\\)\"\\|:\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then I should not see "CONTENTS"
+Then I should not see:
+CONTENTS
+"""
+</code></pre>
+
+<p><strong>Asserts that the current buffer matches some text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I should see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then I should see pattern "CONTENTS"
+Then I should see pattern:
+CONTENTS
+"""
+</code></pre>
+
+<p><strong>Asserts that the current buffer does not match some text.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I should not see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then I should not see pattern "CONTENTS"
+Then I should not see pattern:
+CONTENTS
+"""
+</code></pre>
+
+<p><strong>Selects TEXT if found. Otherwise signal an error.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I select \"\\(.+\\)\"$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>When I select "SOME TEXT"
+</code></pre>
+
+<p><strong>Asserts that there nothing to see in the current buffer.</strong></p>
+
+<p>Pattern:</p>
+
+<pre><code>"^I should not see anything$\\|^the buffer should be empty$"
+</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>Then I should not see anything
+Then the buffer should be empty
+</code></pre>
+
+<h2>Gotchas</h2>
+
+<h3>Action Chain</h3>
+
+<p>Some actions require more than one keyboard input. For example
+functions that reads input via the minibuffer (not via interactive).</p>
+
+<p>To handle such cases, you wrap the actions in a block. For example:</p>
+
+<pre><code>Scenario: Activate linum mode
+  Given I start an action chain
+  And I press "M-x"
+  And I type "linum-mode"
+  And I execute the action chain
+  Then linum-mode should be active
+</code></pre>
+
+<h2>Contributing</h2>
+
+<p>Contribution is much welcome!. When adding new features, please write
+tests for them!</p>
+
+<p>Install <a href="https://github.com/rejeep/carton">carton</a> if you haven't
+already, then:</p>
+
+<pre><code>$ cd /path/to/espuds
+$ carton
+</code></pre>
+
+<p>Run all tests with:</p>
+
+<pre><code>$ make
+</code></pre>

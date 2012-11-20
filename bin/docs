@@ -1,0 +1,101 @@
+#!/usr/bin/env emacs --script
+
+(eval-when-compile
+  (require 'cl))
+
+(defstruct spud head regex description examples)
+
+(defvar espuds-root-path
+  (expand-file-name ".." (expand-file-name ".." load-file-name))
+  "Path to espuds root")
+
+(defvar files
+  (mapcar
+   (lambda (file)
+     (expand-file-name file espuds-root-path))
+   (list
+    "espuds-buffer.el"
+    "espuds-input.el"
+    "espuds-misc.el"
+    "espuds-movement.el"
+    "espuds-region.el"
+    "espuds-text.el"))
+  "Files to parse docs from.")
+
+
+(defun parse-comment (comment)
+  (setq comment (replace-regexp-in-string ";;\\s-*" "" comment)))
+
+(defun parse-file (file)
+  (let (spuds)
+    (with-temp-buffer
+      (insert-file-contents-literally file)
+      (while (re-search-forward "^\(\\(Given\\|When\\|Then\\) \\(\".+\"\\)" nil t)
+        (let (head regex description examples)
+          (setq head (match-string-no-properties 1))
+          (setq regex (match-string-no-properties 2))
+          (let ((example t))
+            (save-excursion
+              (catch 'break
+                (while t
+                  (forward-line -1)
+                  (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+                    (unless (string-match-p "^;;\\s-*$" line)
+                      (if (string-match-p "^;; Example:" line)
+                          (setq example nil)
+                        (if example
+                            (add-to-list 'examples (parse-comment line) nil 'eq)
+                          (add-to-list 'description (parse-comment line) nil 'eq)))
+                      (unless (string-match-p "^;;" line)
+                        (throw 'break nil))))))))
+          (let ((spud
+                 (make-spud
+                  :head head
+                  :regex regex
+                  :description (mapconcat 'identity description "")
+                  :examples examples)))
+            (add-to-list 'spuds spud t 'eq)))))
+    spuds))
+
+(let* ((spuds
+        (apply
+         'append
+         (mapcar
+          (lambda (file)
+            (parse-file file))
+          files)))
+       (template-file (expand-file-name "README.template" espuds-root-path))
+       (template-code
+        (with-temp-buffer
+          (insert-file-contents-literally template-file)
+          (buffer-string)))
+       (readme-file (expand-file-name "README.markdown" espuds-root-path))
+       (docs
+        (apply
+         'concat
+         (mapcar
+          (lambda (spud)
+            (let ((head (spud-head spud))
+                  (regex (spud-regex spud))
+                  (description (spud-description spud))
+                  (examples (spud-examples spud)))
+              (concat
+               "**" description "**\n\n"
+               "Pattern:" "\n\n"
+               "    " "(" head " " regex " ...)\n\n"
+               "Examples:" "\n\n"
+               (mapconcat
+                'identity
+                (mapcar
+                 (lambda (example)
+                   (concat "    " example))
+                 examples)
+                "\n")
+               "\n\n\n")))
+          spuds)))
+       (readme-code
+        (replace-regexp-in-string (regexp-quote "STEP-DEFINITION-DOCS") docs template-code t t)))
+  (find-file readme-file)
+  (erase-buffer)
+  (insert readme-code)
+  (write-file readme-file))
