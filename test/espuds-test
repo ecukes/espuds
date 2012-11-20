@@ -15,6 +15,7 @@
 
 (require 'cl)
 (require 'el-mock)
+(require 'espuds-helpers)
 
 (load (expand-file-name "test-helper.el" espuds-test-path) nil t)
 (dolist (test-file (or argv (directory-files espuds-test-path t "-test.el$")))
