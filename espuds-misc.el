@@ -42,10 +42,8 @@
 ;;   Then I should see message "MESSAGE"
 (Then "^I should see message \"\\(.+\\)\"$"
       (lambda (message)
-        (assert
-         (-contains? ecukes-message-log message)
-         nil
-         "Expected '%s' to be included in the list of printed messages, but was not." message)))
+        (let ((msg "Expected '%s' to be included in the list of printed messages, but was not."))
+          (assert (equal (car (last ecukes-message-log)) message) nil msg message))))
 
 
 (provide 'espuds-misc)
