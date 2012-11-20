@@ -1,4 +1,4 @@
-;;; espuds-movement.el --- Movement related definitions
+;;; espuds-cursor.el --- Cursor related definitions
 
 
 ;; Goes to LINE if it exist.
@@ -151,6 +151,6 @@
 (When "^I go to end of line$" 'move-end-of-line)
 
 
-(provide 'espuds-movement)
+(provide 'espuds-cursor)
 
-;;; espuds-movement.el ends here
+;;; espuds-cursor.el ends here

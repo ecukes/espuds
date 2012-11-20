@@ -53,6 +53,10 @@
    (When "I go to word \"bar\"")
    (should (equal (point) 5))))
 
+;; does not exist
+;; exists, but not at point
+;; exists and at point
+
 (ert-deftest then-the-cursor-should-be-at-point-does-not-exist ()
   "Should not be at point when point does not exist."
   (with-playground

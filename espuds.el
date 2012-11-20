@@ -38,7 +38,7 @@
   (require 'espuds-buffer)
   (require 'espuds-text)
   (require 'espuds-input)
-  (require 'espuds-movement)
+  (require 'espuds-cursor)
   (require 'espuds-region)
   (require 'espuds-misc))
 
