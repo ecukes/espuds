@@ -16,12 +16,14 @@
   (add-to-list 'espuds-steps `(,regex . ,fn)))
 
 (defun espuds-call-step (name args)
-  (let ((matching) (matches))
-    (mapc
-     (lambda (step)
-       (if (string-match-p (car step) name)
-           (setq matching step)))
-     espuds-steps)
+  (let ((matches)
+        (matching
+         (catch 'break
+           (mapc
+            (lambda (step)
+              (if (string-match-p (car step) name)
+                  (throw 'break step)))
+            espuds-steps))))
     (unless matching
       (error "No matching step for '%s'" name))
     (unless args
