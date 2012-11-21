@@ -23,6 +23,34 @@
   (flet ((signal (&rest args) nil))
     (keyboard-quit)))
 
+(defmacro save-column (&rest body)
+  "Save current column; execute BODY; restore current column."
+  `(let ((orig-column (current-column)))
+     ,@body
+     (move-to-column orig-column t)))
+
+(defun espuds-previous-line (&optional n)
+  "The function `previous-line' behave differently depending on
+context. Use `forward-line' as a workaround."
+  (or n (setq n (or n 1)))
+  (if (> (line-number-at-pos (point)) n)
+      (save-column
+       (forward-line (- n)))
+    (goto-char (point-min))))
+
+(defun espuds-next-line (&optional n)
+  "The function `next-line' behave differently depending on
+context. Use `forward-line' as a workaround."
+  (or n (setq n (or n 1)))
+  (if (>
+       (-
+        (line-number-at-pos (point-max))
+        (line-number-at-pos (point)))
+       n)
+      (save-column
+       (forward-line n))
+    (goto-char (point-max))))
+
 (provide 'espuds-helpers)
 
 ;;; espuds-helpers.el ends here

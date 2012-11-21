@@ -50,6 +50,33 @@
               (execute-kbd-macro macro))))
         (setq espuds-previous-keyboard-input keybinding)))
 
+(unless (display-graphic-p)
+  ;; See: When I press "*"
+  (When "^I press \"C-n\"$" 'espuds-next-line)
+
+  ;; See: When I press "*"
+  (When "^I press \"C-u \\([0-9]+\\) C-n\"$"
+        (lambda (n)
+          (espuds-next-line (string-to-number n))))
+
+  ;; See: When I press "*"
+  (When "^I press \"M-\\([0-9]+\\) C-n\"$"
+        (lambda (n)
+          (espuds-next-line (string-to-number n))))
+
+  ;; See: When I press "*"
+  (When "^I press \"C-p\"$" 'espuds-previous-line)
+
+  ;; See: When I press "*"
+  (When "^I press \"C-u \\([0-9]+\\) C-p\"$"
+        (lambda (n)
+          (espuds-previous-line (string-to-number n))))
+
+  ;; See: When I press "*"
+  (When "^I press \"M-\\([0-9]+\\) C-p\"$"
+        (lambda (n)
+          (espuds-previous-line (string-to-number n)))))
+
 ;; Quit without signal.
 ;;
 ;; Example:

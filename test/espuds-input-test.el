@@ -76,6 +76,70 @@
     (When "I press \"C-a\"")
     (should (equal espuds-previous-keyboard-input "C-a"))))
 
+(ert-deftest when-i-press-c-n ()
+  "Should go to next line in batch mode."
+  (with-playground
+   (insert "foo\nbar")
+   (goto-char 2)
+   (When "I press \"C-n\"")
+   (should-be-at-line 2)))
+
+(ert-deftest when-i-press-m-x-c-n ()
+  "Should go x lines down in batch mode."
+  (with-playground
+   (insert "foo\nbar\nbaz")
+   (goto-char 2)
+   (When "I press \"M-2 C-n\"")
+   (should-be-at-line 3)))
+
+(ert-deftest when-i-press-c-u-x-c-n ()
+  "Should go x lines down in batch mode."
+  (with-playground
+   (insert "foo\nbar\nbaz")
+   (goto-char 2)
+   (When "I press \"C-u 2 C-n\"")
+   (should-be-at-line 3)))
+
+(ert-deftest when-i-press-c-n-last-line ()
+  "Should go to end of buffer when at last line."
+  (with-playground
+   (insert "foo")
+   (goto-char 2)
+   (When "I press \"C-n\"")
+   (should-be-at-pos (point-max))))
+
+(ert-deftest when-i-press-c-p ()
+  "Should go to previous line in batch mode."
+  (with-playground
+   (insert "foo\nbar")
+   (goto-char 6)
+   (When "I press \"C-p\"")
+   (should-be-at-line 1)))
+
+(ert-deftest when-i-press-m-x-c-p ()
+  "Should go x lines up in batch mode."
+  (with-playground
+   (insert "foo\nbar\nbaz")
+   (goto-char 10)
+   (When "I press \"M-2 C-p\"")
+   (should-be-at-line 1)))
+
+(ert-deftest when-i-press-c-u-x-c-p ()
+  "Should go x lines up in batch mode."
+  (with-playground
+   (insert "foo\nbar\nbaz")
+   (goto-char 10)
+   (When "I press \"C-u 2 C-p\"")
+   (should-be-at-line 1)))
+
+(ert-deftest when-i-press-c-p-first-line ()
+  "Should go to beginning of buffer when at first line."
+  (with-playground
+   (insert "foo")
+   (goto-char 2)
+   (When "I press \"C-p\"")
+   (should-be-at-pos (point-min))))
+
 (ert-deftest when-i-quit ()
   "Should quit."
   (with-mock

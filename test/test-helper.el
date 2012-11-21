@@ -40,3 +40,9 @@
          (kill-buffer buffer-name))
      (switch-to-buffer (get-buffer-create buffer-name))
      ,@body))
+
+(defun should-be-at-line (line)
+  (should (equal (line-number-at-pos (point)) line)))
+
+(defun should-be-at-pos (pos)
+  (should (equal (point) pos)))
