@@ -17,7 +17,7 @@
     "espuds-buffer.el"
     "espuds-input.el"
     "espuds-misc.el"
-    "espuds-movement.el"
+    "espuds-cursor.el"
     "espuds-region.el"
     "espuds-text.el"))
   "Files to parse docs from.")
@@ -30,31 +30,36 @@
   (let (spuds)
     (with-temp-buffer
       (insert-file-contents-literally file)
-      (while (re-search-forward "^\(\\(Given\\|When\\|Then\\) \\(\".+\"\\)" nil t)
-        (let (head regex description examples)
-          (setq head (match-string-no-properties 1))
-          (setq regex (match-string-no-properties 2))
-          (let ((example t))
+      (while (re-search-forward "^\\s-*\(\\(Given\\|When\\|Then\\) \\(\".+\"\\)" nil t)
+        (unless
             (save-excursion
-              (catch 'break
-                (while t
-                  (forward-line -1)
-                  (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
-                    (unless (string-match-p "^;;\\s-*$" line)
-                      (if (string-match-p "^;; Example:" line)
-                          (setq example nil)
-                        (if example
-                            (add-to-list 'examples (parse-comment line) nil 'eq)
-                          (add-to-list 'description (parse-comment line) nil 'eq)))
-                      (unless (string-match-p "^;;" line)
-                        (throw 'break nil))))))))
-          (let ((spud
-                 (make-spud
-                  :head head
-                  :regex regex
-                  :description (mapconcat 'identity description "")
-                  :examples examples)))
-            (add-to-list 'spuds spud t 'eq)))))
+              (forward-line -1)
+              (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+                (string-match-p "^\\s-*;; See: \\(.+\\)" line)))
+          (let (head regex description examples)
+            (setq head (match-string-no-properties 1))
+            (setq regex (match-string-no-properties 2))
+            (let ((example t))
+              (save-excursion
+                (catch 'break
+                  (while t
+                    (forward-line -1)
+                    (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+                      (unless (string-match-p "^;;\\s-*$" line)
+                        (if (string-match-p "^;; Example:" line)
+                            (setq example nil)
+                          (if example
+                              (add-to-list 'examples (parse-comment line) nil 'eq)
+                            (add-to-list 'description (parse-comment line) nil 'eq)))
+                        (unless (string-match-p "^;;" line)
+                          (throw 'break nil))))))))
+            (let ((spud
+                   (make-spud
+                    :head head
+                    :regex regex
+                    :description (mapconcat 'identity description "")
+                    :examples examples)))
+              (add-to-list 'spuds spud t 'eq))))))
     spuds))
 
 (let* ((spuds
