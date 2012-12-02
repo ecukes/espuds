@@ -17,7 +17,7 @@
     "espuds-buffer.el"
     "espuds-input.el"
     "espuds-misc.el"
-    "espuds-movement.el"
+    "espuds-cursor.el"
     "espuds-region.el"
     "espuds-text.el"))
   "Files to parse docs from.")
