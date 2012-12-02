@@ -32,15 +32,15 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'edmacro)
-  (require 'cl)
-  (require 'espuds-helpers)
-  (require 'espuds-buffer)
-  (require 'espuds-text)
-  (require 'espuds-input)
-  (require 'espuds-cursor)
-  (require 'espuds-region)
-  (require 'espuds-misc))
+  (require 'cl))
+(require 'edmacro)
+(require 'espuds-helpers)
+(require 'espuds-buffer)
+(require 'espuds-text)
+(require 'espuds-input)
+(require 'espuds-cursor)
+(require 'espuds-region)
+(require 'espuds-misc)
 
 (provide 'espuds)
 
