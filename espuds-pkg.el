@@ -1,2 +1,3 @@
-(define-package "espuds" "0.1.0"
-  "Ecukes step definitions")
+(define-package "espuds" "0.2.1"
+  "Ecukes step definitions"
+  '((s "")))
