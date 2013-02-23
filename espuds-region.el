@@ -1,5 +1,8 @@
 ;;; espuds-region.el --- region related definitions
 
+(eval-when-compile
+  (require 'cl))
+(require 'espuds-helpers)
 
 ;; Deactivates mark.
 ;;

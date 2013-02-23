@@ -1,5 +1,7 @@
 ;;; espuds-cursor.el --- Cursor related definitions
 
+(eval-when-compile
+  (require 'cl))
 
 ;; Goes to LINE if it exist.
 ;;

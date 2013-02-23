@@ -1,5 +1,7 @@
 ;;; espuds-buffer.el --- Buffer related definitions
 
+(eval-when-compile
+  (require 'cl))
 
 ;; Switches to BUFFER.
 ;;

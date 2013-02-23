@@ -1,5 +1,9 @@
 ;;; espuds-text.el --- Text related definitions
 
+(eval-when-compile
+  (require 'cl))
+(require 'espuds-helpers)
+
 ;; Inserts CONTENTS into the current buffer.
 ;;
 ;; Example:

@@ -1,5 +1,6 @@
 ;;; espuds-input.el --- Input related definitions
 
+(require 'espuds-helpers)
 
 (defvar espuds-action-chain nil
   "List of actions to execute.")

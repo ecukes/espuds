@@ -1,5 +1,9 @@
 ;;; espuds-misc.el --- Definitions that don't fit in any other file
 
+(eval-when-compile
+  (require 'cl))
+(require 'espuds-helpers)
+
 ;; Turns on some mode.
 ;;
 ;; Example:
