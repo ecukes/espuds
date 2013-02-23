@@ -5,7 +5,7 @@
   (with-playground
    (with-mock
     (insert "foo\nbar\nbaz")
-    (stub goto-line)
+    (stub espuds-goto-line)
     (mock
      (assert nil nil "Requested line '%s', but buffer only has '%d' line(s)." "4" 3))
     (When "I go to line \"4\""))))
@@ -15,7 +15,7 @@
   (with-playground
    (with-mock
     (insert "foo\nbar\nbaz")
-    (mock (goto-line 2))
+    (mock (espuds-goto-line 2))
     (When "I go to line \"2\""))))
 
 (ert-deftest when-i-go-to-point-does-not-exist ()

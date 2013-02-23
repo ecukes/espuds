@@ -2,6 +2,7 @@
 
 (eval-when-compile
   (require 'cl))
+(require 'espuds-helpers)
 
 ;; Goes to LINE if it exist.
 ;;
@@ -13,7 +14,7 @@
               (line-num (string-to-number line))
               (message "Requested line '%s', but buffer only has '%d' line(s)."))
           (assert (<= line-num num-lines) nil message line num-lines)
-          (goto-line line-num))))
+          (espuds-goto-line line-num))))
 
 ;; Goes to POINT if it exist.
 ;;

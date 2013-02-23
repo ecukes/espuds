@@ -23,6 +23,11 @@
   (flet ((signal (&rest args) nil))
     (keyboard-quit)))
 
+(defun espuds-goto-line (line)
+  "Go to LINE."
+  (goto-char (point-min))
+  (forward-line (1- line)))
+
 (provide 'espuds-helpers)
 
 ;;; espuds-helpers.el ends here
