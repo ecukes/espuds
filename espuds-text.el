@@ -5,105 +5,97 @@
 (require 's)
 (require 'espuds-helpers)
 
-;; Inserts CONTENTS into the current buffer.
-;;
-;; Example:
-;;   When I insert "CONTENTS"
-;;
-;;   When I insert:
-;;     """
-;;     CONTENTS
-;;     """
 (When "^I insert\\(?: \"\\(.+\\)\"\\|:\\)$"
-      (lambda (contents)
-        (insert contents)))
+  "Inserts CONTENTS into the current buffer.
 
+Examples:
+ - When I insert \"CONTENTS\"
+ - When I insert:
+     \"\"\"
+     CONTENTS
+     \"\"\""
+  (lambda (contents)
+    (insert contents)))
 
-;; Asserts that the current buffer includes some text.
-;;
-;; Example:
-;;   Then I should see "CONTENTS"
-;;
-;;   Then I should see:
-;;   """
-;;   CONTENTS
-;;   """
 (Then "^I should see\\(?: \"\\(.+\\)\"\\|:\\)$"
-      (lambda (expected)
-        (let ((actual (espuds-buffer-contents))
-              (message "Expected '%s' to be part of '%s', but was not."))
-          (assert (s-contains? expected actual) nil message expected actual))))
+  "Asserts that the current buffer includes some text.
 
-;; Asserts that the current buffer does not include some text.
-;;
-;; Example:
-;;   Then I should not see "CONTENTS"
-;;
-;;   Then I should not see:
-;;   """
-;;   CONTENTS
-;;   """
+Examples:
+ - Then I should see \"CONTENTS\"
+ - Then I should see:
+     \"\"\"
+     CONTENTS
+     \"\"\""
+  (lambda (expected)
+    (let ((actual (espuds-buffer-contents))
+          (message "Expected '%s' to be part of '%s', but was not."))
+      (assert (s-contains? expected actual) nil message expected actual))))
+
 (Then "^I should not see\\(?: \"\\(.+\\)\"\\|:\\)$"
-      (lambda (expected)
-        (let ((actual (espuds-buffer-contents))
-              (message "Expected '%s' to not be part of '%s', but was."))
-          (assert (not (s-contains? expected actual)) nil message expected actual))))
+  "Asserts that the current buffer does not include some text.
 
+Examples:
+ - Then I should not see \"CONTENTS\"
+ - Then I should not see:
+     \"\"\"
+     CONTENTS
+     \"\"\""
+  (lambda (expected)
+    (let ((actual (espuds-buffer-contents))
+          (message "Expected '%s' to not be part of '%s', but was."))
+      (assert (not (s-contains? expected actual)) nil message expected actual))))
 
-;; Asserts that the current buffer matches some text.
-;;
-;; Example:
-;;   Then I should see pattern "CONTENTS"
-;;
-;;   Then I should see pattern:
-;;   """
-;;   CONTENTS
-;;   """
 (Then "^I should see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
-      (lambda (expected)
-        (let ((actual (espuds-buffer-contents))
-              (message "Expected to see pattern '%s' in '%s', but did not."))
-          (assert
-           (s-matches? expected actual) nil message expected actual))))
+  "Asserts that the current buffer matches some text.
 
-;; Asserts that the current buffer does not match some text.
-;;
-;; Example:
-;;   Then I should not see pattern "CONTENTS"
-;;
-;;   Then I should not see pattern:
-;;   """
-;;   CONTENTS
-;;   """
+Examples:
+ - Then I should see pattern \"CONTENTS\"
+ - Then I should see pattern:
+     \"\"\"
+     CONTENTS
+     \"\"\""
+  (lambda (expected)
+    (let ((actual (espuds-buffer-contents))
+          (message "Expected to see pattern '%s' in '%s', but did not."))
+      (assert
+       (s-matches? expected actual) nil message expected actual))))
+
 (Then "^I should not see pattern\\(?: \"\\(.+\\)\"\\|:\\)$"
-      (lambda (expected)
-        (let ((actual (espuds-buffer-contents))
-              (message "Expected to not see pattern '%s' in '%s', but did."))
-          (assert
-           (not (s-matches? expected actual)) nil message expected actual))))
+  "Asserts that the current buffer does not match some text.
 
-;; Selects TEXT if found. Otherwise signal an error.
-;;
-;; Example:
-;;   When I select "SOME TEXT"
-;;
+Examples:
+ - Then I should not see pattern \"CONTENTS\"
+ - Then I should not see pattern:
+     \"\"\"
+     CONTENTS
+     \"\"\""
+  (lambda (expected)
+    (let ((actual (espuds-buffer-contents))
+          (message "Expected to not see pattern '%s' in '%s', but did."))
+      (assert
+       (not (s-matches? expected actual)) nil message expected actual))))
+
 (When "^I select \"\\(.+\\)\"$"
-      (lambda (text)
-        (goto-char (point-min))
-        (let ((search (re-search-forward text nil t)))
-          (assert search nil "The text '%s' was not found in the current buffer." text))
-        (set-mark (point))
-        (re-search-backward text)))
+  "Selects TEXT if found. Otherwise signal an error.
 
-;; Asserts that there nothing to see in the current buffer.
-;;
-;; Example:
-;;   Then I should not see anything
-;;   Then the buffer should be empty
+Examples:
+ - When I select \"SOME TEXT\""
+  (lambda (text)
+    (goto-char (point-min))
+    (let ((search (re-search-forward text nil t)))
+      (assert search nil "The text '%s' was not found in the current buffer." text))
+    (set-mark (point))
+    (re-search-backward text)))
+
 (Then "^I should not see anything$\\|^the buffer should be empty$"
-      (lambda ()
-        (let ((message "Expected buffer to be empty, but had content: '%s'"))
-          (assert (equal (buffer-size) 0) nil message (espuds-buffer-contents)))))
+  "Asserts that there nothing to see in the current buffer.
+
+Examples:
+ - Then I should not see anything
+ - Then the buffer should be empty"
+  (lambda ()
+    (let ((message "Expected buffer to be empty, but had content: '%s'"))
+      (assert (equal (buffer-size) 0) nil message (espuds-buffer-contents)))))
 
 
 (provide 'espuds-text)

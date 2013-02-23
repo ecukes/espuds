@@ -1,101 +1,65 @@
 #!/usr/bin/env emacs --script
 
-(eval-when-compile
-  (require 'cl))
+(require 's)
+(require 'dash)
 
-(defstruct spud head regex description examples)
+(defvar root-path
+  (expand-file-name ".." (expand-file-name ".." load-file-name)))
 
-(defvar espuds-root-path
-  (expand-file-name ".." (expand-file-name ".." load-file-name))
-  "Path to espuds root")
+(add-to-list 'load-path root-path)
 
 (defvar files
   (mapcar
    (lambda (file)
-     (expand-file-name file espuds-root-path))
+     (expand-file-name file root-path))
    (list
     "espuds-buffer.el"
     "espuds-input.el"
     "espuds-misc.el"
     "espuds-cursor.el"
     "espuds-region.el"
-    "espuds-text.el"))
-  "Files to parse docs from.")
+    "espuds-text.el")))
 
+(defvar docs (make-hash-table))
 
-(defun parse-comment (comment)
-  (setq comment (replace-regexp-in-string ";;\\s-*" "" comment)))
+(defalias 'Given 'define-docs)
+(defalias 'When 'define-docs)
+(defalias 'Then 'define-docs)
+(defalias 'And 'define-docs)
+(defalias 'But 'define-docs)
 
-(defun parse-file (file)
-  (let (spuds)
+(defun define-docs (pattern &rest args)
+  (let ((doc (car args)))
+    (puthash pattern doc docs)))
+
+(mapc
+ (lambda (file)
+   (load file t t))
+ files)
+
+(let ((output))
+  (maphash
+   (lambda (pattern doc)
+     (let* ((lines (s-split "\n" doc))
+            (header (car lines))
+            (description
+             (mapconcat
+              (lambda (line)
+                (s-concat "    " line))
+              (-remove 's-blank? (cdr lines))
+              "\n")))
+       (add-to-list
+        'output
+        (s-concat
+         "### " header "\n\n" "Pattern:" "\n\n" "    " pattern "\n\n" "Docs:" "\n\n" description "\n"))))
+   docs)
+
+  (let ((template-file (expand-file-name "README.template" root-path))
+        (readme-file (expand-file-name "README.markdown" root-path)))
     (with-temp-buffer
-      (insert-file-contents-literally file)
-      (while (re-search-forward "^\(\\(Given\\|When\\|Then\\) \\(\".+\"\\)" nil t)
-        (let (head regex description examples)
-          (setq head (match-string-no-properties 1))
-          (setq regex (match-string-no-properties 2))
-          (let ((example t))
-            (save-excursion
-              (catch 'break
-                (while t
-                  (forward-line -1)
-                  (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
-                    (unless (string-match-p "^;;\\s-*$" line)
-                      (if (string-match-p "^;; Example:" line)
-                          (setq example nil)
-                        (if example
-                            (add-to-list 'examples (parse-comment line) nil 'eq)
-                          (add-to-list 'description (parse-comment line) nil 'eq)))
-                      (unless (string-match-p "^;;" line)
-                        (throw 'break nil))))))))
-          (let ((spud
-                 (make-spud
-                  :head head
-                  :regex regex
-                  :description (mapconcat 'identity description "")
-                  :examples examples)))
-            (add-to-list 'spuds spud t 'eq)))))
-    spuds))
-
-(let* ((spuds
-        (apply
-         'append
-         (mapcar
-          (lambda (file)
-            (parse-file file))
-          files)))
-       (template-file (expand-file-name "README.template" espuds-root-path))
-       (template-code
-        (with-temp-buffer
-          (insert-file-contents-literally template-file)
-          (buffer-string)))
-       (readme-file (expand-file-name "README.markdown" espuds-root-path))
-       (docs
-        (apply
-         'concat
-         (mapcar
-          (lambda (spud)
-            (let ((head (spud-head spud))
-                  (regex (spud-regex spud))
-                  (description (spud-description spud))
-                  (examples (spud-examples spud)))
-              (concat
-               "### " description "\n\n"
-               "Pattern:" "\n\n"
-               "    " "(" head " " regex " ...)\n\n"
-               "Examples:" "\n\n"
-               (mapconcat
-                'identity
-                (mapcar
-                 (lambda (example)
-                   (concat "    " example))
-                 examples)
-                "\n")
-               "\n\n\n")))
-          spuds)))
-       (readme-code
-        (replace-regexp-in-string (regexp-quote "STEP-DEFINITION-DOCS") docs template-code t t)))
-  (find-file readme-file)
-  (erase-buffer)
-  (insert readme-code)
-  (write-file readme-file))
+      (insert-file-contents-literally template-file)
+      (let ((content
+             (s-replace "STEP-DEFINITION-DOCS" (mapconcat 'identity output "\n") (buffer-string))))
+        (erase-buffer)
+        (insert content)
+        (write-file readme-file)))))

@@ -5,4 +5,5 @@
 (depends-on "s")
 
 (development
- (depends-on "el-mock"))
+ (depends-on "el-mock")
+ (depends-on "dash"))

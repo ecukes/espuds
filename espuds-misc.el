@@ -4,50 +4,50 @@
   (require 'cl))
 (require 'espuds-helpers)
 
-;; Turns on some mode.
-;;
-;; Example:
-;;   When I turn on ruby-mode
 (When "^I turn on \\(.+\\)$"
-      (lambda (mode)
-        (let ((v (vconcat [?\C-u 1 ?\M-x] (string-to-vector mode))))
-          (execute-kbd-macro v))))
+  "Turns on some mode.
 
-;; Set some variable
-;;
-;; Example:
-;;   When I set sentence-end-double-space to nil
+Examples:
+ - When I turn on ruby-mode"
+  (lambda (mode)
+    (let ((v (vconcat [?\C-u 1 ?\M-x] (string-to-vector mode))))
+      (execute-kbd-macro v))))
+
 (When "^I set \\(.+\\) to \\(.+\\)$"
-      (lambda (var val)
-        (set (intern var) (read val))))
+  "Set some variable
 
-;; Loads CONTENTS with Emacs load command.
-;;
-;; Example:
-;;   When I load the following:
-;;   """
-;;   CONTENTS
-;;   """
+Examples:
+ - When I set sentence-end-double-space to nil"
+  (lambda (var val)
+    (set (intern var) (read val))))
+
 (When "^I load the following:$"
-      (lambda (contents)
-        (espuds-fake-eval contents)))
+  "Loads CONTENTS with Emacs load command.
 
-;; Creates a new temp file called FILE and opens it.
-;;
-;; Example:
-;;   When I open temp file "SOME FILE"
+Examples:
+ - When I load the following:
+     \"\"\"
+     CONTENTS
+     \"\"\""
+  (lambda (contents)
+    (espuds-fake-eval contents)))
+
 (When "^I open temp file \"\\(.+\\)\"$"
-      (lambda (file)
-        (find-file (make-temp-file file))))
+  "Creates a new temp file called FILE and opens it.
 
-;; Asserts that MESSAGE has been printed.
-;;
-;; Example:
-;;   Then I should see message "MESSAGE"
+Examples:
+ - When I open temp file \"SOME FILE\""
+  (lambda (file)
+    (find-file (make-temp-file file))))
+
 (Then "^I should see message \"\\(.+\\)\"$"
-      (lambda (message)
-        (let ((msg "Expected '%s' to be included in the list of printed messages, but was not."))
-          (assert (equal (car (last ecukes-message-log)) message) nil msg message))))
+  "Asserts that MESSAGE has been printed.
+
+Examples:
+ - Then I should see message \"MESSAGE\""
+  (lambda (message)
+    (let ((msg "Expected '%s' to be included in the list of printed messages, but was not."))
+      (assert (equal (car (last ecukes-message-log)) message) nil msg message))))
 
 
 (provide 'espuds-misc)

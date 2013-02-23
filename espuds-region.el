@@ -4,63 +4,62 @@
   (require 'cl))
 (require 'espuds-helpers)
 
-;; Deactivates mark.
-;;
-;; Example:
-;;   Given there is no region selected
 (Given "^there is no region selected$"
-       (lambda ()
-         (deactivate-mark)))
+  "Deactivates mark.
 
-;; Activates transient mark mode.
-;;
-;; Example:
-;;   Given transient mark mode is active
-;;   Given transient mark mode is inactive
+Examples:
+ - Given there is no region selected"
+  (lambda ()
+    (deactivate-mark)))
+
 (Given "^transient mark mode is \\(active\\|inactive\\)$"
-       (lambda (status)
-         (transient-mark-mode
-          (if (string= status "active") 1 -1))))
+  "Activates transient mark mode.
 
-;; Sets the mark at point.
-;;
-;; Example:
-;;   When I set the mark
+Examples:
+ - Given transient mark mode is active
+ - Given transient mark mode is inactive"
+  (lambda (status)
+    (transient-mark-mode
+     (if (string= status "active") 1 -1))))
+
 (When "^I set the mark$"
-      (lambda ()
-        (set-mark (point))))
+  "Sets the mark at point.
 
-;; Pop and move point to the top position on the mark-ring
-;;
-;; Example:
-;;   When I pop the mark
+Examples:
+ - When I set the mark"
+  (lambda ()
+    (set-mark (point))))
+
 (When "^I pop the mark$"
-      (lambda ()
-        (set-mark-command 4)))
+  "Pop and move point to the top position on the mark-ring
 
-;; Asserts that the selected region is same as EXPECTED.
-;;
-;; Example:
-;;   Then the region should be "REGION"
-;;
-;;   Then the region should be:
-;;   """
-;;   REGION
-;;   """
+Examples:
+ - When I pop the mark"
+  (lambda ()
+    (set-mark-command 4)))
+
 (Then "^the region should be\\(?: \"\\(.*\\)\"\\|:\\)$"
-      (lambda (expected)
-        (let ((actual (espuds-region))
-              (message "Expected the region to be '%s', but was '%s'."))
-          (assert (equal expected actual) nil message expected actual))))
+  "Asserts that the selected region is same as EXPECTED.
 
-;; Asserts that the region is not active.
-;;
-;; Example:
-;;   Then the region should not be active
+Examples:
+ - Then the region should be \"REGION\"
+ - Then the region should be:
+     \"\"\"
+     REGION
+     \"\"\""
+  (lambda (expected)
+    (let ((actual (espuds-region))
+          (message "Expected the region to be '%s', but was '%s'."))
+      (assert (equal expected actual) nil message expected actual))))
+
 (Then "^the region should not be active$"
-      (lambda ()
-        (let ((message "Expected the region not to be active, but it was."))
-          (assert (not (region-active-p)) nil message))))
+  "Asserts that the region is not active.
+
+Examples:
+ - Then the region should not be active"
+  (lambda ()
+    (let ((message "Expected the region not to be active, but it was."))
+      (assert (not (region-active-p)) nil message))))
 
 (provide 'espuds-region)
 

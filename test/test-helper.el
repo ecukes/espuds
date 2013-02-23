@@ -7,6 +7,8 @@
 (defalias 'But 'espuds-define-or-call-step)
 
 (defun espuds-define-or-call-step (name &rest args)
+  (when (= (length args) 2)
+    (setq args (cdr args)))
   (let ((arg (car args)))
     (if (functionp arg)
         (espuds-define-step name arg)
