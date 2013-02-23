@@ -2,6 +2,7 @@
 
 (eval-when-compile
   (require 'cl))
+(require 's)
 (require 'espuds-helpers)
 
 ;; Inserts CONTENTS into the current buffer.
@@ -31,7 +32,7 @@
       (lambda (expected)
         (let ((actual (espuds-buffer-contents))
               (message "Expected '%s' to be part of '%s', but was not."))
-          (assert (search expected actual) nil message expected actual))))
+          (assert (s-contains? expected actual) nil message expected actual))))
 
 ;; Asserts that the current buffer does not include some text.
 ;;
@@ -46,7 +47,7 @@
       (lambda (expected)
         (let ((actual (espuds-buffer-contents))
               (message "Expected '%s' to not be part of '%s', but was."))
-          (assert (not (search expected actual)) nil message expected actual))))
+          (assert (not (s-contains? expected actual)) nil message expected actual))))
 
 
 ;; Asserts that the current buffer matches some text.
@@ -63,7 +64,7 @@
         (let ((actual (espuds-buffer-contents))
               (message "Expected to see pattern '%s' in '%s', but did not."))
           (assert
-           (string-match-p expected actual) nil message expected actual))))
+           (s-matches? expected actual) nil message expected actual))))
 
 ;; Asserts that the current buffer does not match some text.
 ;;
@@ -79,7 +80,7 @@
         (let ((actual (espuds-buffer-contents))
               (message "Expected to not see pattern '%s' in '%s', but did."))
           (assert
-           (not (string-match-p expected actual)) nil message expected actual))))
+           (not (s-matches? expected actual)) nil message expected actual))))
 
 ;; Selects TEXT if found. Otherwise signal an error.
 ;;

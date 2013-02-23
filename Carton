@@ -2,5 +2,7 @@
 
 (package "espuds" "0.1.0" "Ecukes step definitions")
 
+(depends-on "s")
+
 (development
  (depends-on "el-mock"))
