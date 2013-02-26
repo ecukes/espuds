@@ -12,6 +12,12 @@
    (Given "I switch to buffer \"foo\"")
    (should (equal (buffer-name) "foo"))))
 
+(ert-deftest given-i-switch-to-buffer-spaces ()
+  "Should switch to buffer spaces."
+  (with-playground
+   (Given "I switch to buffer \" foo bar \"")
+   (should (equal (buffer-name) " foo bar "))))
+
 (ert-deftest then-i-should-be-in-buffer-correct ()
   "Should be in buffer."
   (with-playground

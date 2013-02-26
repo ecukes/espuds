@@ -2,6 +2,7 @@
 
 (eval-when-compile
   (require 'cl))
+(require 's)
 
 (Given "^\\(?:I am in buffer\\|I switch to buffer\\) \"\\(.+\\)\"$"
   "Switches to BUFFER.
@@ -10,8 +11,10 @@ Examples:
  - When I switch to buffer \"Foo\"
  - Given I am in buffer \"*scratch*\""
   (lambda (buffer)
-    (let ((v (vconcat [?\C-x ?b] (string-to-vector buffer))))
-      (execute-kbd-macro v))))
+    (if (s-matches? "\\s-" buffer)
+        (switch-to-buffer buffer)
+      (let ((v (vconcat [?\C-x ?b] (string-to-vector buffer))))
+        (execute-kbd-macro v)))))
 
 (Then "^I should be in buffer \"\\(.+\\)\"$"
   "Asserts that the current buffer is BUFFER.
