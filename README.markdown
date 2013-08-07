@@ -1,4 +1,4 @@
-# Espuds - Ecukes step definitions
+# Espuds - Ecukes step definitions [![Build Status](https://api.travis-ci.org/rejeep/espuds.png?branch=master)](http://travis-ci.org/rejeep/espuds)
 
 First of all. If you don't know what
 [Ecukes](http://github.com/rejeep/ecukes) it, go read up about it. If
@@ -35,11 +35,11 @@ To handle such cases, you wrap the actions in a block. For example:
 Contribution is much welcome!. When adding new features, please write
 tests for them!
 
-Install [carton](https://github.com/rejeep/carton) if you haven't
+Install [cask](https://github.com/rejeep/cask.el) if you haven't
 already, then:
 
     $ cd /path/to/espuds
-    $ carton
+    $ cask
 
 Run all tests with:
 
@@ -531,3 +531,4 @@ Docs:
     Examples:
      - When I switch to buffer "Foo"
      - Given I am in buffer "*scratch*"
+
