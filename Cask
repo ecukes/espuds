@@ -1,4 +1,4 @@
-(source "melpa" "http://melpa.milkbox.net/packages/")
+(source melpa)
 
 (package "espuds" "0.2.1" "Ecukes step definitions")
 

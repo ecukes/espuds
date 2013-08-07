@@ -1,5 +1,5 @@
 all:
-	carton exec ./test/espuds-test
+	cask exec ./test/espuds-test
 
 docs:
-	carton exec ./bin/docs
+	cask exec ./bin/docs
