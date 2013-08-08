@@ -41,7 +41,7 @@
   (with-mock
    (stub espuds-region => "")
    (mock
-    (assert nil nil "Expected the region to be '%s', but was '%s'." "REGION" ""))
+    (error "Expected the region to be '%s', but was '%s'." "REGION" ""))
    (Then "the region should be \"REGION\"")))
 
 (ert-deftest then-the-region-should-be-arg-wrong-region ()
@@ -49,7 +49,7 @@
   (with-mock
    (stub espuds-region => "REG")
    (mock
-    (assert nil nil "Expected the region to be '%s', but was '%s'." "REGION" "REG"))
+    (error "Expected the region to be '%s', but was '%s'." "REGION" "REG"))
    (Then "the region should be \"REGION\"")))
 
 (ert-deftest then-the-region-should-be-arg ()
@@ -63,7 +63,7 @@
   (with-mock
    (stub espuds-region => "")
    (mock
-    (assert nil nil "Expected the region to be '%s', but was '%s'." "REGION" ""))
+    (error "Expected the region to be '%s', but was '%s'." "REGION" ""))
    (Then "the region should be:" "REGION")))
 
 (ert-deftest then-the-region-should-be-arg-wrong-region ()
@@ -71,7 +71,7 @@
   (with-mock
    (stub espuds-region => "REG")
    (mock
-    (assert nil nil "Expected the region to be '%s', but was '%s'." "REGION" "REG"))
+    (error "Expected the region to be '%s', but was '%s'." "REGION" "REG"))
    (Then "the region should be:" "REGION")))
 
 (ert-deftest then-the-region-should-not-be-active-when-active ()
@@ -79,7 +79,7 @@
   (with-mock
    (stub region-active-p => t)
    (mock
-    (assert nil nil "Expected the region not to be active, but it was."))
+    (error "Expected the region not to be active, but it was."))
    (Then "the region should not be active")))
 
 (ert-deftest then-the-region-should-not-be-active-when-inactive ()

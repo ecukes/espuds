@@ -31,7 +31,7 @@
    (with-mock
     (stub buffer-name => "bar")
     (mock
-     (assert nil nil "Expected to be in buffer '%s', but was in '%s'" "foo" "bar"))
+     (error "Expected to be in buffer '%s', but was in '%s'" "foo" "bar"))
     (Then "I should be in buffer \"foo\""))))
 
 (ert-deftest then-i-should-be-in-file-not-visiting-file ()
@@ -39,7 +39,7 @@
   (with-mock
    (stub buffer-file-name => nil)
    (mock
-    (assert nil nil "Expected file to be '%s', but not visiting any file." "foo"))
+    (error "Expected file to be '%s', but not visiting any file." "foo"))
    (Then "I should be in file \"foo\"")))
 
 (ert-deftest then-i-should-be-in-file-different-file ()
@@ -47,7 +47,7 @@
   (with-mock
    (stub buffer-file-name => "/path/to/foo")
    (mock
-    (assert nil nil "Expected file to be '%s', but was '%s'." "bar" "/path/to/foo"))
+    (error "Expected file to be '%s', but was '%s'." "bar" "/path/to/foo"))
    (Then "I should be in file \"bar\"")))
 
 (ert-deftest then-i-should-be-in-file-same-file ()

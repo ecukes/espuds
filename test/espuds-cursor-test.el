@@ -7,7 +7,7 @@
     (insert "foo\nbar\nbaz")
     (stub espuds-goto-line)
     (mock
-     (assert nil nil "Requested line '%s', but buffer only has '%d' line(s)." "4" 3))
+     (error "Requested line '%s', but buffer only has '%d' line(s)." "4" 3))
     (When "I go to line \"4\""))))
 
 (ert-deftest when-i-go-to-line-exists ()
@@ -25,7 +25,7 @@
     (insert "foobarbaz")
     (stub goto-char)
     (mock
-     (assert nil nil "Requested point '%s', but buffer only has '%d' point(s)." 11 9))
+     (error "Requested point '%s', but buffer only has '%d' point(s)." 11 9))
     (When "I go to point \"11\""))))
 
 (ert-deftest when-i-go-to-point-exists ()
@@ -43,7 +43,7 @@
     (insert "foo bar baz")
     (stub backward-char)
     (mock
-     (assert nil nil "Can not go to word '%s' since it does not exist in the current buffer: %s" "qux" "foo bar baz"))
+     (error "Can not go to word '%s' since it does not exist in the current buffer: %s" "qux" "foo bar baz"))
     (When "I go to word \"qux\""))))
 
 (ert-deftest when-i-go-to-word-exists ()
@@ -63,7 +63,7 @@
    (with-mock
     (insert "foo bar baz")
     (mock
-     (assert nil nil "Expected cursor to be at point '%s', but was at '%s'" "15" 12))
+     (error "Expected cursor to be at point '%s', but was at '%s'" "15" 12))
     (Then "the cursor should be at point \"15\""))))
 
 (ert-deftest then-the-cursor-should-be-at-point-exists-but-not-at-point ()
@@ -72,7 +72,7 @@
    (with-mock
     (insert "foo bar baz")
     (mock
-     (assert nil nil "Expected cursor to be at point '%s', but was at '%s'" "4" 3))
+     (error "Expected cursor to be at point '%s', but was at '%s'" "4" 3))
     (goto-char 3)
     (Then "the cursor should be at point \"4\""))))
 
@@ -89,7 +89,7 @@
    (with-mock
     (insert "foo bar baz")
     (mock
-     (assert nil nil "Expected '%s' to be before point but was '%s'." "bar" "o bar"))
+     (error "Expected '%s' to be before point but was '%s'." "bar" "o bar"))
     (goto-char 3)
     (Then "the cursor should be before \"bar\""))))
 
@@ -106,7 +106,7 @@
    (with-mock
     (insert "foo bar baz")
     (mock
-     (assert nil nil "Expected '%s' to be after point but was '%s'." "bar" "fo"))
+     (error "Expected '%s' to be after point but was '%s'." "bar" "fo"))
     (goto-char 3)
     (Then "the cursor should be after \"bar\""))))
 
@@ -123,7 +123,7 @@
    (with-mock
     (insert "foobarbaz")
     (mock
-     (assert nil nil "Expected '%s' to be left of point and '%s' to be right of point, but was: '%s[CURSOR]%s'" "foo" "bar" "fo" "obarb"))
+     (error "Expected '%s' to be left of point and '%s' to be right of point, but was: '%s[CURSOR]%s'" "foo" "bar" "fo" "obarb"))
     (goto-char 3)
     (Then "the cursor should be between \"foo\" and \"bar\""))))
 
@@ -140,7 +140,7 @@
    (with-mock
     (insert "foobarbaz")
     (mock
-     (assert nil nil "Expected '%s' to be before point but was '%s'." "bar" "arbaz"))
+     (error "Expected '%s' to be before point but was '%s'." "bar" "arbaz"))
     (goto-char 5)
     (Then "the cursor should be before \"bar\""))))
 
@@ -157,7 +157,7 @@
    (with-mock
     (insert "foobarbaz")
     (mock
-     (assert nil nil "Expected '%s' to be after point but was '%s'." "bar" "foob"))
+     (error "Expected '%s' to be after point but was '%s'." "bar" "foob"))
     (goto-char 5)
     (Then "the cursor should be after \"bar\""))))
 

@@ -49,7 +49,7 @@
   "Should not see message when not exists."
   (with-mock
    (let ((ecukes-message-log (list "foo" "bar")))
-     (mock (assert nil nil "Expected '%s' to be included in the list of printed messages, but was not." "MESSAGE"))
+     (mock (error "Expected '%s' to be included in the list of printed messages, but was not." "MESSAGE"))
      (Then "I should see message \"MESSAGE\""))))
 
 (ert-deftest then-i-should-see-message-when-exists ()
