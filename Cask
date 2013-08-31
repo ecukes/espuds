@@ -4,6 +4,7 @@
 (package "espuds" "0.2.1" "Ecukes step definitions")
 
 (depends-on "s" "1.3.1")
+(depends-on "dash" "2.1.0")
 
 (development
  (depends-on "el-mock")

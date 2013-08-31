@@ -3,6 +3,7 @@
 (eval-when-compile
   (require 'cl))
 (require 'espuds-helpers)
+(require 'dash)
 
 (When "^I turn on \\(.+\\)$"
   "Turns on some mode.
@@ -47,7 +48,7 @@ Examples:
  - Then I should see message \"MESSAGE\""
   (lambda (message)
     (let ((msg "Expected '%s' to be included in the list of printed messages, but was not."))
-      (assert (equal (car (last ecukes-message-log)) message) nil msg message))))
+      (assert (-contains? ecukes-message-log message) nil msg message))))
 
 
 (provide 'espuds-misc)
