@@ -1,5 +1,5 @@
 all:
-	cask exec ert-runner run -l test/espuds-test.el
+	cask exec ert-runner
 
 docs:
 	cask exec ./bin/docs
