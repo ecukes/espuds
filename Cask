@@ -1,7 +1,7 @@
 (source gnu)
 (source melpa)
 
-(package "espuds" "0.2.1" "Ecukes step definitions")
+(package "espuds" "0.2.2" "Ecukes step definitions")
 
 (depends-on "s" "1.7.0")
 (depends-on "dash" "2.1.0")
