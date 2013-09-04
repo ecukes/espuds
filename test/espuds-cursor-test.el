@@ -185,13 +185,14 @@
 (ert-deftest when-i-go-to-beginning-of-line ()
   "Should go to beginning of line."
   (with-playground
-   (with-mock
-    (mock (move-beginning-of-line))
-    (When "I go to beginning of line"))))
+   (insert "foo")
+   (should (equal (point) 4))
+   (When "I go to beginning of line")
+   (should (equal (point) 1))))
 
 (ert-deftest when-i-go-to-end-of-line ()
   "Should go to end of line."
   (with-playground
-   (with-mock
-    (mock (move-end-of-line))
-    (When "I go to end of line"))))
+   (insert "foo")
+   (When "I go to end of line")
+   (should (equal (point) 4))))

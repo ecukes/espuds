@@ -148,7 +148,8 @@ Examples:
 
 Examples:
  - When I go to beginning of line"
-  'move-beginning-of-line)
+  (lambda ()
+    (call-interactively 'move-beginning-of-line)))
 
 
 (When "^I go to end of line$"
@@ -156,7 +157,8 @@ Examples:
 
 Examples:
  - When I go to end of line"
-  'move-end-of-line)
+  (lambda ()
+    (call-interactively 'move-end-of-line)))
 
 
 (provide 'espuds-cursor)
