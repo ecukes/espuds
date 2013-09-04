@@ -4,7 +4,7 @@
 
 ;; Author: Johan Andersson <johan.rejeep@gmail.com>
 ;; Maintainer: Johan Andersson <johan.rejeep@gmail.com>
-;; Version: 0.2.3
+;; Version: 0.2.4
 ;; Keywords: test
 ;; URL: http://github.com/rejeep/espuds
 
