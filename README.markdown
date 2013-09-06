@@ -10,10 +10,10 @@ Espuds is a collection of the most commonly used step definitions.
 
 ## Installation
 
-Add `ansi` to your [Cask](https://github.com/rejeep/cask.el) file:
+Add `espuds` to your [Cask](https://github.com/ecukes/espuds) file:
 
 ```lisp
-(depends-on "ansi")
+(depends-on "espuds")
 ```
 
 ## Gotchas
