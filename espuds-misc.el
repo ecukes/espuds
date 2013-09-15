@@ -49,6 +49,7 @@ Examples:
  - Then I should see message \"MESSAGE\""
   (lambda (message)
     (let ((msg "Expected '%s' to be included in the list of printed messages, but was not."))
+      (setq message (replace-regexp-in-string "\\\\" "" message t t))
       (assert (-contains? (-map 's-trim ecukes-message-log) message) nil msg message))))
 
 
