@@ -66,3 +66,7 @@
   "Should see message when not last exists."
   (let ((ecukes-message-log (list "foo" "\nMESSAGE\n" "bar")))
     (Then "I should see message \"MESSAGE\"")))
+
+(ert-deftest then-i-should-see-message-quotes ()
+  (let ((ecukes-message-log (list "foo" "awesome \"MESSAGE\" dude" "bar")))
+    (Then "I should see message \"awesome \\\"MESSAGE\\\" dude\"")))
