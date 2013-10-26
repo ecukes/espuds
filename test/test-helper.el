@@ -1,40 +1,16 @@
-(defvar espuds-steps nil)
+(require 'f)
+(require 'el-mock)
+(eval-when-compile
+  (require 'cl)) ;; for el-mock
 
-(defalias 'Given 'espuds-define-or-call-step)
-(defalias 'When 'espuds-define-or-call-step)
-(defalias 'Then 'espuds-define-or-call-step)
-(defalias 'And 'espuds-define-or-call-step)
-(defalias 'But 'espuds-define-or-call-step)
+(defvar espuds-test/test-path
+  (f-dirname load-file-name))
 
-(defun espuds-define-or-call-step (name &rest args)
-  (when (= (length args) 2)
-    (setq args (cdr args)))
-  (let ((arg (car args)))
-    (if (functionp arg)
-        (espuds-define-step name arg)
-      (espuds-call-step name args))))
+(defvar espuds-test/root-path
+  (f-parent espuds-test/test-path))
 
-(defun espuds-define-step (regex fn)
-  (add-to-list 'espuds-steps `(,regex . ,fn)))
-
-(defun espuds-call-step (name args)
-  (let ((matches)
-        (matching
-         (catch 'break
-           (mapc
-            (lambda (step)
-              (if (string-match-p (car step) name)
-                  (throw 'break step)))
-            espuds-steps))))
-    (unless matching
-      (error "No matching step for '%s'" name))
-    (unless args
-      (when (string-match (car matching) name)
-        (let ((i 1))
-          (while (match-string i name)
-            (add-to-list 'matches (match-string i name) t 'eq)
-            (setq i (1+ i))))))
-    (apply (cdr matching) (or args matches))))
+(defvar espuds-test/vendor-path
+  (f-expand "vendor" espuds-test/root-path))
 
 (defmacro with-playground (&rest body)
   `(let ((buffer-name "*espuds*"))
@@ -42,3 +18,10 @@
          (kill-buffer buffer-name))
      (switch-to-buffer (get-buffer-create buffer-name))
      ,@body))
+
+(load (f-expand "espuds-steps" espuds-test/test-path))
+
+(unless (require 'ert nil 'noerror)
+  (require 'ert (f-expand "ert" espuds-test/vendor-path)))
+
+(require 'espuds (f-expand "espuds" espuds-test/root-path))
