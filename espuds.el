@@ -6,7 +6,7 @@
 ;; Maintainer: Johan Andersson <johan.rejeep@gmail.com>
 ;; Version: 0.2.5
 ;; Keywords: test
-;; URL: http://github.com/rejeep/espuds
+;; URL: http://github.com/ecukes/espuds
 
 ;; This file is NOT part of GNU Emacs.
 
