@@ -4,7 +4,7 @@
 
 ;; Author: Johan Andersson <johan.rejeep@gmail.com>
 ;; Maintainer: Johan Andersson <johan.rejeep@gmail.com>
-;; Version: 0.2.5
+;; Version: 0.2.6
 ;; Keywords: test
 ;; Package-Requires: ((s "1.7.0") (dash "2.2.0") (noflet "0.0.10") (f "0.12.1"))
 ;; URL: http://github.com/ecukes/espuds
