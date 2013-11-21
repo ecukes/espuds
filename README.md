@@ -1,4 +1,4 @@
-# Espuds - Ecukes step definitions [![Build Status](https://api.travis-ci.org/rejeep/espuds.el.png?branch=master)](http://travis-ci.org/rejeep/espuds.el)
+# Espuds - Ecukes step definitions [![Build Status](https://api.travis-ci.org/ecukes/espuds.el.png?branch=master)](http://travis-ci.org/ecukes/espuds.el)
 
 First of all. If you don't know what
 [Ecukes](http://github.com/ecukes/ecukes) is, go read up about it
