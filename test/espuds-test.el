@@ -460,9 +460,12 @@
 
 (ert-deftest given-there-is-no-region-selected ()
   "Should deactivate mark."
-  (with-mock
-   (mock (deactivate-mark))
-   (Given "there is no region selected")))
+  (should-not (region-active-p))
+  (set-mark (point))
+  (activate-mark)
+  (should (region-active-p))
+  (Given "there is no region selected")
+  (should-not (region-active-p)))
 
 (ert-deftest given-transient-mark-mode-is-active ()
   "Should be active."
