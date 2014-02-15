@@ -61,7 +61,7 @@
   "Dump CONTENTS to a temp file and then load it."
   (let ((file (make-temp-file "espuds-")))
     (f-write contents 'utf-8 file)
-    (load file)))
+    (load file nil t)))
 
 (defun espuds-region ()
   "Return the text selected by region, if any."
