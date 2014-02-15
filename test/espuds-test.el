@@ -99,10 +99,11 @@
 (ert-deftest when-i-go-to-point-exists ()
   "Should go to point when exists."
   (with-playground
-   (with-mock
-    (insert "foobarbaz")
-    (mock (goto-char 5))
-    (When "I go to point \"5\""))))
+   (insert "foobarbaz")
+   (goto-char (point-min))
+   (should (= (point) (point-min)))
+   (When "I go to point \"5\"")
+   (should (= (point) 5))))
 
 (ert-deftest when-i-go-to-word-does-not-exist ()
   "Should not go to word when does not exist."
