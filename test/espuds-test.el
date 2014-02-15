@@ -108,11 +108,8 @@
 (ert-deftest when-i-go-to-word-does-not-exist ()
   "Should not go to word when does not exist."
   (with-playground
-   (with-mock
-    (insert "foo bar baz")
-    (stub backward-char)
-    (mock
-     (error "Can not go to word '%s' since it does not exist in the current buffer: %s" "qux" "foo bar baz"))
+   (insert "foo bar baz")
+   (should-error
     (When "I go to word \"qux\""))))
 
 (ert-deftest when-i-go-to-word-exists ()
