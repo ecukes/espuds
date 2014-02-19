@@ -396,8 +396,8 @@
   (with-playground
    (with-mock
     (stub message)
-    (When "I turn on longlines-mode"))
-   (should longlines-mode)))
+    (When "I turn on abbrev-mode"))
+   (should abbrev-mode)))
 
 (ert-deftest when-i-set-variable-to-symbol-value ()
   "Should set variable to symbol value."
