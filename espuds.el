@@ -381,6 +381,11 @@ chain. Otherwise simulate the TYPING."
     (let ((message "Expected buffer to be empty, but had content: '%s'"))
       (cl-assert (equal (buffer-size) 0) nil message (buffer-string)))))
 
+(When "^I delete other windows$"
+  "Deletes all windows except current one."
+  (lambda ()
+    (delete-other-windows)))
+
 
 (provide 'espuds)
 
