@@ -729,9 +729,8 @@
 (ert-deftest when-i-delete-other-windows ()
   "Should kill all windows except 1."
   (with-playground
-   (with-mock
-    (should (equal 1 (count-windows)))
-    (split-window-right)
-    (should (equal 2 (count-windows)))
-    (When "I delete other windows")
-    (should (equal 1 (count-windows))))))
+   (should (equal 1 (count-windows)))
+   (split-window-right)
+   (should (equal 2 (count-windows)))
+   (When "I delete other windows")
+   (should (equal 1 (count-windows)))))
