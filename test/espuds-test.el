@@ -725,6 +725,7 @@
   "Should not see when no content."
   (with-playground
    (Then "the buffer should be empty")))
+
 (ert-deftest when-i-delete-other-windows ()
   "Should kill all windows except 1."
   (with-playground
