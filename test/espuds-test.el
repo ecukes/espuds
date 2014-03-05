@@ -725,3 +725,144 @@
   "Should not see when no content."
   (with-playground
    (Then "the buffer should be empty")))
+
+(ert-deftest then-current-point-should-be-in-bold ()
+  (with-playground
+   (lisp-mode)
+   ;; make sure keyword-face is bold
+   (set-face-attribute font-lock-keyword-face nil :weight 'bold)
+   (insert "(defun foo ())")
+   (espuds-fontify)
+   (goto-char 2)
+   (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+   (Then "current point should be in bold")))
+
+(ert-deftest then-current-point-should-be-in-bold-when-not-bold ()
+  (with-playground
+   (with-mock
+    (lisp-mode)
+    ;; make sure keyword-face is *not* bold
+    (set-face-attribute font-lock-keyword-face nil :weight 'normal)
+    (insert "(defun foo ())")
+    (espuds-fontify)
+    (goto-char 2)
+    (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+    (mock
+     (error "Expected current point to be in bold"))
+    (Then "current point should be in bold"))))
+
+(ert-deftest then-current-point-should-be-in-italic ()
+  (with-playground
+   (lisp-mode)
+   ;; make sure keyword-face is italic
+   (set-face-attribute font-lock-keyword-face nil :slant 'italic)
+   (insert "(defun foo ())")
+   (espuds-fontify)
+   (goto-char 2)
+   (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+   (Then "current point should be in italic")))
+
+(ert-deftest then-current-point-should-be-in-italic-when-not-italic ()
+  (with-playground
+   (with-mock
+    (lisp-mode)
+    ;; make sure keyword-face is *not* italic
+    (set-face-attribute font-lock-keyword-face nil :slant 'normal)
+    (insert "(defun foo ())")
+    (espuds-fontify)
+    (goto-char 2)
+    (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+    (mock
+     (error "Expected current point to be in italic"))
+    (Then "current point should be in italic"))))
+
+(ert-deftest then-current-point-should-be-in-strike-through ()
+  (with-playground
+   (lisp-mode)
+   ;; make sure keyword-face is strike-through
+   (set-face-attribute font-lock-keyword-face nil :strike-through t)
+   (insert "(defun foo ())")
+   (espuds-fontify)
+   (goto-char 2)
+   (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+   (Then "current point should be in strike-through")))
+
+(ert-deftest then-current-point-should-be-in-strike-through-when-not-strike-through ()
+  (with-playground
+   (with-mock
+    (lisp-mode)
+    ;; make sure keyword-face is *not* strike-through
+    (set-face-attribute font-lock-keyword-face nil :strike-through nil)
+    (insert "(defun foo ())")
+    (espuds-fontify)
+    (goto-char 2)
+    (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+    (mock
+     (error "Expected current point to be in strike-through"))
+    (Then "current point should be in strike-through"))))
+
+(ert-deftest then-current-point-should-be-in-underline ()
+  (with-playground
+   (lisp-mode)
+   ;; make sure keyword-face is underline
+   (set-face-attribute font-lock-keyword-face nil :underline t)
+   (insert "(defun foo ())")
+   (espuds-fontify)
+   (goto-char 2)
+   (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+   (Then "current point should be in underline")))
+
+(ert-deftest then-current-point-should-be-in-underline-when-not-underline ()
+  (with-playground
+   (with-mock
+    (lisp-mode)
+    ;; make sure keyword-face is *not* underline
+    (set-face-attribute font-lock-keyword-face nil :underline nil)
+    (insert "(defun foo ())")
+    (espuds-fontify)
+    (goto-char 2)
+    (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+    (mock
+     (error "Expected current point to be in underline"))
+    (Then "current point should be in underline"))))
+
+(ert-deftest then-current-point-should-have-some-face ()
+  (with-playground
+   (lisp-mode)
+   (insert "(defun foo ())")
+   (espuds-fontify)
+   (goto-char 2)
+   (should (member 'font-lock-keyword-face (espuds-faces-at-point)))
+   (Then "current point should have the font-lock-keyword-face face")))
+
+(ert-deftest then-current-point-should-have-some-face-when-not ()
+  (with-playground
+   (with-mock
+    (fundamental-mode)
+    (insert "foobar")
+    (espuds-fontify)
+    (goto-char 2)
+    (should (null (espuds-faces-at-point)))
+    (mock
+     (error "Face '%s' was not found at point" "font-lock-keyword-face"))
+    (Then "current point should have the font-lock-keyword-face face"))))
+
+(ert-deftest then-current-point-should-have-no-face ()
+  (with-playground
+   (fundamental-mode)
+   (insert "foobar")
+   (goto-char 2)
+   (Then "current point should have no face")))
+
+(ert-deftest then-current-point-should-have-no-face-but-does ()
+  (with-playground
+   (with-mock
+    (lisp-mode)
+    (insert "(defun foo ())")
+    (espuds-fontify)
+    (goto-char 2)
+    (should (equal '(font-lock-keyword-face) (espuds-faces-at-point)))
+    (mock
+     (error "Current point was expected to have no face but does have '%S'"
+            '(font-lock-keyword-face)))
+    (Then "current point should have no face"))))
