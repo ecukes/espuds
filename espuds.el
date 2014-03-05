@@ -97,7 +97,7 @@
   "Check if character at point has face PROPERTY.
 The value of the face PROPERTY must be one of VALID-VALUES."
   (espuds-fontify)
-  (cl-member-if
+  (-any?
    (lambda (face)
      (memq (face-attribute face property nil t) valid-values))
    (espuds-faces-at-point)))
@@ -460,9 +460,9 @@ chain. Otherwise simulate the TYPING."
   (lambda (face)
     (espuds-fontify)
     (cl-assert
-     (cl-member
-      (intern face)
-      (espuds-faces-at-point))
+     (-contains?
+      (espuds-faces-at-point)
+      (intern face))
      nil
      "Face '%s' was not found at point"
      face)
