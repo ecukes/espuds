@@ -79,6 +79,53 @@
   (goto-char (point-min))
   (forward-line (1- line)))
 
+(defun espuds-faces-at-point ()
+  "Return a list of faces at the current point."
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if (listp face)
+        face
+      (list face))))
+
+(defun espuds-fontify ()
+  "Make sure the buffer is completely fontified."
+  (setq font-lock-fontify-buffer-function
+        #'font-lock-default-fontify-buffer)
+  (font-lock-fontify-buffer))
+
+(defun espuds-character-fontified-p (property valid-values)
+  "Check if character at point has face PROPERTY.
+The value of the face PROPERTY must be one of VALID-VALUES."
+  (espuds-fontify)
+  (cl-member-if
+   (lambda (face)
+     (memq (face-attribute face property nil t) valid-values))
+   (espuds-faces-at-point)))
+
+(defun espuds-character-bold-p ()
+  "Make sure the character at point is bold."
+  (espuds-character-fontified-p
+   :weight
+   '(semi-bold bold extra-bold ultra-bold)))
+
+(defun espuds-character-italic-p ()
+  "Make sure the character at point is italic."
+  (espuds-character-fontified-p
+   :slant
+   '(italic oblique)))
+
+(defun espuds-character-strike-through-p ()
+  "Make sure the character at point is in strike-through."
+  (espuds-character-fontified-p
+   :strike-through
+   '(t)))
+
+(defun espuds-character-underline-p ()
+  "Make sure the character at point is underlined."
+  (espuds-character-fontified-p
+   :underline
+   '(t)))
+
 
 ;;;; Definitions
 
@@ -381,6 +428,49 @@ chain. Otherwise simulate the TYPING."
     (let ((message "Expected buffer to be empty, but had content: '%s'"))
       (cl-assert (equal (buffer-size) 0) nil message (buffer-string)))))
 
+(Then "^current point should be in bold$"
+  (lambda ()
+    (cl-assert
+     (pillar-steps::character-bold-p)
+     nil
+     "Expected current point to be in bold")))
+
+(Then "^current point should be in italic$"
+  (lambda ()
+    (cl-assert
+     (pillar-steps::character-italic-p)
+     nil
+     "Expected current point to be in italic")))
+
+(Then "^current point should be in strike-through$"
+  (lambda ()
+    (cl-assert
+     (pillar-steps::character-strike-through-p)
+     nil
+     "Expected current point to be in strike-through")))
+
+(Then "^current point should be in underline$"
+  (lambda ()
+    (cl-assert
+     (pillar-steps::character-underline-p)
+     nil
+     "Expected current point to be in underline")))
+
+(Then "^current point should have the \\([-[:alnum:]]+\\) face$"
+  (lambda (face)
+    (pillar-steps::fontify)
+    (cl-assert
+     (cl-member
+      (intern face)
+      (pillar-steps::faces-at-point)))
+    nil))
+
+(Then "^current point should have no face$"
+  (lambda ()
+    (pillar-steps::fontify)
+    (cl-assert
+     (null (pillar-steps::faces-at-point)))
+    nil))
 
 (provide 'espuds)
 
