@@ -479,6 +479,11 @@ chain. Otherwise simulate the TYPING."
        faces))
     nil))
 
+(When "^I delete other windows$"
+  "Deletes all windows except current one."
+  (lambda ()
+    (delete-other-windows)))
+
 (provide 'espuds)
 
 ;;; espuds.el ends here

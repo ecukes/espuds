@@ -866,3 +866,12 @@
      (error "Current point was expected to have no face but does have '%S'"
             '(font-lock-keyword-face)))
     (Then "current point should have no face"))))
+
+(ert-deftest when-i-delete-other-windows ()
+  "Should kill all windows except 1."
+  (with-playground
+   (should (equal 1 (count-windows)))
+   (split-window-right)
+   (should (equal 2 (count-windows)))
+   (When "I delete other windows")
+   (should (equal 1 (count-windows)))))
