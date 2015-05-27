@@ -32,6 +32,58 @@ block. For example:
       And I execute the action chain
       Then linum-mode should be active
 
+## List of Steps
+<!-- generated with a `grep -E "^\((Given|When|Then)" espuds.el | sed 's:^(:- :' | sed 's:"\^::' | sed 's:\$"::'` :D -->
+- Given \\(?:I am in buffer\\|I switch to buffer\\) \"\\(.+\\)\"
+- Then I should be in buffer \"\\(.+\\)\"
+- Then I should be in file \"\\(.+\\)\"
+- Given the buffer is empty$\\|^I clear the buffer
+- When I go to line \"\\([0-9]+\\)\"
+- When I go to point \"\\([0-9]+\\)\"
+- When I go to word \"\\(.+\\)\"
+- Then the cursor should be at point \"\\(.+\\)\"
+- Then the cursor should be before \"\\(.+\\)\"
+- Then the cursor should be after \"\\(.+\\)\"
+- Then the cursor should be between \"\\(.+\\)\" and \"\\(.+\\)\"
+- When I place the cursor between \"\\(.+\\)\" and \"\\(.+\\)\"
+- When I place the cursor before \"\\(.+\\)\"
+- When I place the cursor after \"\\(.+\\)\"
+- When I go to beginning of buffer
+- When I go to end of buffer
+- When I go to beginning of line
+- When I go to end of line
+- When I start an action chain
+- When I execute the action chain
+- When I call \"\\(.+\\)\"
+- When I press \"\\(.+\\)\"
+- When I quit
+- When I type \"\\(.+\\)\"
+- When I turn on \\(.+\\)
+- When I set \\(.+\\) to \\(.+\\)
+- When I load the following:
+- When I open temp file \"\\(.+\\)\"
+- Then I should see message \"\\(.+\\)\"
+- Given there is no region selected
+- Given transient mark mode is \\(active\\|inactive\\)
+- When I set the mark
+- When I pop the mark
+- Then the region should be\\(?: \"\\(.*\\)\"\\|:\\)
+- Then the region should not be active
+- When I insert\\(?: \"\\(.+\\)\"\\|:\\)
+- Then I should see\\(?: \"\\(.+\\)\"\\|:\\)
+- Then I should not see\\(?: \"\\(.+\\)\"\\|:\\)
+- Then I should see pattern\\(?: \"\\(.+\\)\"\\|:\\)
+- Then I should not see pattern\\(?: \"\\(.+\\)\"\\|:\\)
+- When I select \"\\(.+\\)\"
+- Then I should not see anything$\\|^the buffer should be empty
+- Then current point should be in bold
+- Then current point should be in italic
+- Then current point should be in strike-through
+- Then current point should be in underline
+- Then current point should have the \\([-[:alnum:]]+\\) face
+- Then current point should have no face
+- When I delete other windows
+
 ## Contributing
 
 Contribution is much welcome! When adding new features, please write
