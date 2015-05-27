@@ -875,3 +875,9 @@
    (should (equal 2 (count-windows)))
    (When "I delete other windows")
    (should (equal 1 (count-windows)))))
+
+(ert-deftest when-i-call-a-command ()
+  "Invoke specified command."
+  (with-playground
+   (When "I call \"insert-parentheses\"")
+   (should (equal (buffer-string) "()"))))

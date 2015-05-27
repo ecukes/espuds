@@ -283,6 +283,11 @@ The value of the face PROPERTY must be one of VALID-VALUES."
     (execute-kbd-macro espuds-action-chain)
     (setq espuds-chain-active nil)))
 
+(When "^I call \"\\(.+\\)\"$"
+  "Call the provided COMMAND"
+  (lambda (command)
+    (call-interactively (intern command))))
+
 (When "^I press \"\\(.+\\)\"$"
   "Execute the function that KEYBINDING is bound to.
 
