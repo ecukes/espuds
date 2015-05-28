@@ -39,6 +39,10 @@ block. For example:
 
 ## List of Steps
 <!-- generated with a `grep -E "^\((Given|When|Then)" espuds.el | sed 's:^(:- :' | sed 's:"\^::' | sed 's:\$"::'` :D -->
+You can retrieve them by running the `bin/docs` script.
+
+Otherwise you can just read this list:
+
 - Given \\(?:I am in buffer\\|I switch to buffer\\) \"\\(.+\\)\"
 - Then I should be in buffer \"\\(.+\\)\"
 - Then I should be in file \"\\(.+\\)\"

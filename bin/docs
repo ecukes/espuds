@@ -1,0 +1,3 @@
+#!/bin/bash
+# Print the espuds steps from elisp definition file
+grep -E "^\((Given|When|Then)" "$(dirname $0:A)/../espuds.el" | sed 's:^(:- :' | sed 's:"\^::' | sed 's:\$"::'
