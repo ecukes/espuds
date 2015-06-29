@@ -1,8 +1,8 @@
 # Espuds - Ecukes step definitions
 
 [![Build Status](https://api.travis-ci.org/ecukes/espuds.png?branch=master)](http://travis-ci.org/ecukes/espuds)
-[![MELPA](http://melpa.org/packages/espuds-badge.svg)](http://melpa.org/#/espuds))
-[![MELPA stable](http://stable.melpa.org/packages/espuds-badge.svg)](http://stable.melpa.org/#/espuds))
+[![MELPA](http://melpa.org/packages/espuds-badge.svg)](http://melpa.org/#/espuds)
+[![MELPA stable](http://stable.melpa.org/packages/espuds-badge.svg)](http://stable.melpa.org/#/espuds)
 [![License] (http://img.shields.io/:license-gpl3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 First of all. If you don't know what
