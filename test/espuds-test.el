@@ -284,10 +284,8 @@
     (should (equal (espuds-region) ""))))
 
 (ert-deftest quit ()
-  "Should quit."
-  (with-mock
-   (mock (keyboard-quit))
-   (espuds-quit)))
+  "Should quit, but should not signal."
+  (espuds-quit))
 
 (ert-deftest when-i-start-an-action-chain ()
   "Should start an action chain."
