@@ -569,7 +569,7 @@
    (with-mock
     (insert "foo bar baz")
     (mock
-     (error "Expected '%s' to be part of '%s', but was not." "qux" "foo bar baz"))
+     (error "Expected\n%s\nto be part of:\n%s" "qux" "foo bar baz"))
     (Then "I should see \"qux\""))))
 
 (ert-deftest then-i-should-see-when-exists-py-string ()
@@ -584,7 +584,7 @@
    (with-mock
     (insert "foo bar baz")
     (mock
-     (error "Expected '%s' to be part of '%s', but was not." "qux" "foo bar baz"))
+     (error "Expected\n%s\nto be part of:\n%s" "qux" "foo bar baz"))
     (Then "I should see:" "qux"))))
 
 (ert-deftest then-i-should-not-see-does-not-exist-arg ()
