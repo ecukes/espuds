@@ -391,7 +391,7 @@ chain. Otherwise simulate the TYPING."
   "Asserts that the current buffer includes some text."
   (lambda (expected)
     (let ((actual (buffer-string))
-          (message "Expected '%s' to be part of '%s', but was not."))
+          (message "Expected\n%s\nto be part of:\n%s"))
       (cl-assert (s-contains? expected actual) nil message expected actual))))
 
 (Then "^I should not see\\(?: \"\\(.+\\)\"\\|:\\)$"
