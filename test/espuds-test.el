@@ -264,7 +264,7 @@
   (with-playground
    (with-mock
     (stub make-temp-file => "/tmp/espuds-xyz")
-    (mock (load "/tmp/espuds-xyz"))
+    (mock (load "/tmp/espuds-xyz" nil t))
     (mock (f-write "CONTENT" 'utf-8 "/tmp/espuds-xyz"))
     (espuds-fake-eval "CONTENT"))))
 
