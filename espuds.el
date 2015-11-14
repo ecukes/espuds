@@ -323,7 +323,7 @@ chain. Otherwise simulate the TYPING."
 (When "^I turn on \\(.+\\)$"
   "Turns on some mode."
   (lambda (mode)
-    (let ((v (vconcat [?\C-u 1 ?\M-x] (string-to-vector mode))))
+    (let ((v (vconcat [?\C-u ?\M-x] (string-to-vector mode))))
       (execute-kbd-macro v))))
 
 (When "^I set \\(.+\\) to \\(.+\\)$"

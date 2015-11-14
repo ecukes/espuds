@@ -389,11 +389,27 @@
    (When "I turn on text-mode")
    (should (equal major-mode 'text-mode))))
 
+(ert-deftest when-i-turn-on-major-mode-multiple-times ()
+  "Should turn on major mode."
+  (with-playground
+   (When "I turn on c-mode")
+   (When "I turn on c-mode")
+   (should (equal major-mode 'c-mode))))
+
 (ert-deftest when-i-turn-on-minor-mode ()
   "Should turn on minor mode."
   (with-playground
    (with-mock
     (stub message)
+    (When "I turn on abbrev-mode"))
+   (should abbrev-mode)))
+
+(ert-deftest when-i-turn-on-minor-mode-multiple-times ()
+  "Should turn on (not toggle) minor mode."
+  (with-playground
+   (with-mock
+    (stub message)
+    (When "I turn on abbrev-mode")
     (When "I turn on abbrev-mode"))
    (should abbrev-mode)))
 
