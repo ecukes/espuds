@@ -326,6 +326,15 @@ chain. Otherwise simulate the TYPING."
     (let ((v (vconcat [?\C-u ?\M-x] (string-to-vector mode))))
       (execute-kbd-macro v))))
 
+(When "^I turn off minor mode \\(.+\\)$"
+  "Turns off some minor mode.
+
+To turn off a major mode you have to turn on another one, so this cannot
+be used for major modes."
+  (lambda (mode)
+    (let ((v (vconcat [?\C-u ?- ?\M-x] (string-to-vector mode))))
+      (execute-kbd-macro v))))
+
 (When "^I set \\(.+\\) to \\(.+\\)$"
   "Set some variable."
   (lambda (var val)
