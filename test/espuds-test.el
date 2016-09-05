@@ -413,6 +413,15 @@
     (When "I turn on abbrev-mode"))
    (should abbrev-mode)))
 
+(ert-deftest when-i-turn-on-and-off-minor-mode ()
+  "Should turn off minor mode."
+  (with-playground
+   (with-mock
+    (stub message)
+    (When "I turn on abbrev-mode")
+    (When "I turn off minor mode abbrev-mode"))
+   (should-not abbrev-mode)))
+
 (ert-deftest when-i-set-variable-to-symbol-value ()
   "Should set variable to symbol value."
   (let ((variable))
