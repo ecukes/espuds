@@ -23,6 +23,27 @@ Add `espuds` to your [Cask](https://github.com/cask/cask) file:
 
 ## Gotchas
 
+### Spurious test passes due to cl-assert issues in emacs 25
+
+In emacs 25.1 `cl-assert` (which is used interally by espuds) changed in a way that caused messy stack traces on test failures.
+
+In emacs 25.2 `cl-assert` changed again in a way that causes assertion failures to completely bypass ecukes' error handling. This means that all tests will appear to pass regardless of their correctness. 
+
+This is being looked into, but a temporary workaround is to use the following snippet in your `support/env.el` file to restore the old behaviour:
+
+```
+ ;; This fixes issues in emacs 25.x where cl-assert has strange behaviours when `debug-on-error` is `t`.
+ (when (and (= emacs-major-version 25))
+   (require 'cl-preloaded)
+   (setf (symbol-function 'cl--assertion-failed)
+         (lambda (form &optional string sargs args)
+           "This function has been modified by ecukes to fix problems with cl-assert in emacs 25.
+           The modified version should only be used for running espuds tests."
+           (if string
+               (apply #'error string (append sargs args))
+             (signal 'cl-assertion-failed `(,form ,@sargs))))))
+```
+
 ### Action Chain
 
 Some actions require more than one keyboard input. For example
