@@ -27,9 +27,10 @@
 (require 'espuds (f-expand "espuds" espuds-test/root-path))
 
 
-;; This fixes an issue in emacs 25.1 where the debugger would be invoked
-;; incorrectly, breaking ert.
-(when (and (= emacs-major-version 25) (< emacs-minor-version 2))
+;; This fixes an issue in emacs 25 where the debugger would be invoked
+;; incorrectly, breaking various things in ert and espuds. In real usage the
+;; issue is fixed by an advice in ecukes.
+(when (and (= emacs-major-version 25))
   (require 'cl-preloaded)
   (setf (symbol-function 'cl--assertion-failed)
         (lambda (form &optional string sargs args)
