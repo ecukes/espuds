@@ -24,6 +24,8 @@
 (unless (require 'ert nil 'noerror)
   (require 'ert (f-expand "ert" espuds-test/vendor-path)))
 
+(require 'undercover)
+(undercover "espuds.el")
 (require 'espuds (f-expand "espuds" espuds-test/root-path))
 
 
