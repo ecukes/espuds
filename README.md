@@ -88,6 +88,7 @@ Otherwise you can just read this list:
 - When I quit
 - When I type \"\\(.+\\)\"
 - When I turn on \\(.+\\)
+- When I turn off minor mode \\(.+\\)
 - When I set \\(.+\\) to \\(.+\\)
 - When I load the following:
 - When I open temp file \"\\(.+\\)\"
