@@ -14,9 +14,24 @@ Espuds is a collection of the most commonly used step definitions.
 
 ## Installation
 
-Add `espuds` to your [Cask](https://github.com/cask/cask) file:
+### Cask
+
+Add `espuds` to your [Cask][Cask] file:
 
 ```lisp
+(source melpa)
+
+(depends-on "espuds")
+```
+
+### Eask
+> 💡 Eask is very similar to Cask; anything that applies to Cask will apply to Eask
+
+Add `espuds` to your [Eask][Eask] file:
+
+```elisp
+(source 'melpa)
+
 (depends-on "espuds")
 ```
 
@@ -24,13 +39,17 @@ Add `espuds` to your [Cask](https://github.com/cask/cask) file:
 
 ### Spurious test passes due to cl-assert issues in emacs 25
 
-In emacs 25.1 `cl-assert` (which is used interally by espuds) changed in a way that caused messy stack traces on test failures.
+In emacs 25.1 `cl-assert` (which is used interally by espuds) changed in a way
+that caused messy stack traces on test failures.
 
-In emacs 25.2 `cl-assert` changed again in a way that causes assertion failures to completely bypass ecukes' error handling. This means that all tests will appear to pass regardless of their correctness. 
+In emacs 25.2 `cl-assert` changed again in a way that causes assertion failures
+to completely bypass ecukes' error handling. This means that all tests will
+appear to pass regardless of their correctness. 
 
-This is being looked into, but a temporary workaround is to use the following snippet in your `support/env.el` file to restore the old behaviour:
+This is being looked into, but a temporary workaround is to use the following
+snippet in your `support/env.el` file to restore the old behaviour:
 
-```
+```elisp
  ;; This fixes issues in emacs 25.x where cl-assert has strange behaviours when `debug-on-error` is `t`.
  (when (and (= emacs-major-version 25))
    (require 'cl-preloaded)
@@ -118,7 +137,7 @@ Otherwise you can just read this list:
 Contribution is much welcome! When adding new features, please write
 tests for them!
 
-Install [cask](https://github.com/cask/cask) if you haven't already,
+Install [cask][Cask] if you haven't already,
 then:
 
     $ cd /path/to/espuds
@@ -127,3 +146,7 @@ then:
 Run all tests with:
 
     $ make
+
+[Cask]: https://github.com/cask/cask
+[Eask]: https://github.com/emacs-eask/cli
+[MELPA]: https://melpa.org
