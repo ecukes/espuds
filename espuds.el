@@ -6,7 +6,7 @@
 ;; Maintainer: Johan Andersson <johan.rejeep@gmail.com>
 ;; Version: 0.3.3
 ;; Keywords: test
-;; Package-Requires: ((s "1.7.0") (dash "2.2.0") (f "0.12.1"))
+;; Package-Requires: ((emacs "25") (s "1.7.0") (dash "2.2.0") (f "0.12.1"))
 ;; URL: http://github.com/ecukes/espuds
 
 ;; This file is NOT part of GNU Emacs.

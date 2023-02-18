@@ -1,6 +1,6 @@
 # Espuds - Ecukes step definitions
 
-[![Build Status](https://api.travis-ci.org/ecukes/espuds.png?branch=master)](http://travis-ci.org/ecukes/espuds)
+[![CI](https://github.com/ecukes/espuds/actions/workflows/test.yml/badge.svg)](https://github.com/ecukes/espuds/actions/workflows/test.yml)
 [![MELPA](http://melpa.org/packages/espuds-badge.svg)](http://melpa.org/#/espuds)
 [![MELPA stable](http://stable.melpa.org/packages/espuds-badge.svg)](http://stable.melpa.org/#/espuds)
 
