@@ -145,7 +145,7 @@
    (goto-char 3)
    (Then "the cursor should be at point \"3\"")))
 
-(ert-deftest then-the-cursor-should-be-before-is-not-before ()
+(ert-deftest then-the-cursor-should-be-before-is-not-before-1 ()
   "Should not be before word when not before."
   (with-playground
    (with-mock
@@ -196,7 +196,7 @@
    (goto-char 4)
    (Then "the cursor should be between \"foo\" and \"bar\"")))
 
-(ert-deftest then-the-cursor-should-be-before-is-not-before ()
+(ert-deftest then-the-cursor-should-be-before-is-not-before-2 ()
   "Should not be before when not before."
   (with-playground
    (with-mock
