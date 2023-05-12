@@ -155,14 +155,14 @@
     (goto-char 3)
     (Then "the cursor should be before \"bar\""))))
 
-(ert-deftest then-the-cursor-should-be-before-is-before ()
+(ert-deftest then-the-cursor-should-be-before-is-before-1 ()
   "Should be before word when before."
   (with-playground
    (insert "foo bar baz")
    (goto-char 5)
    (Then "the cursor should be before \"bar\"")))
 
-(ert-deftest then-the-cursor-should-be-after-is-not-after ()
+(ert-deftest then-the-cursor-should-be-after-is-not-after-1 ()
   "Should not be after word when not after."
   (with-playground
    (with-mock
@@ -172,7 +172,7 @@
     (goto-char 3)
     (Then "the cursor should be after \"bar\""))))
 
-(ert-deftest then-the-cursor-should-be-after-is-after ()
+(ert-deftest then-the-cursor-should-be-after-is-after-1 ()
   "Should be after word when after."
   (with-playground
    (insert "foo bar baz")
@@ -206,14 +206,14 @@
     (goto-char 5)
     (Then "the cursor should be before \"bar\""))))
 
-(ert-deftest then-the-cursor-should-be-before-is-before ()
+(ert-deftest then-the-cursor-should-be-before-is-before-2 ()
   "Should be before when before."
   (with-playground
    (insert "foobarbaz")
    (goto-char 4)
    (Then "the cursor should be before \"bar\"")))
 
-(ert-deftest then-the-cursor-should-be-after-is-not-after ()
+(ert-deftest then-the-cursor-should-be-after-is-not-after-2 ()
   "Should not be after when not after."
   (with-playground
    (with-mock
@@ -223,7 +223,7 @@
     (goto-char 5)
     (Then "the cursor should be after \"bar\""))))
 
-(ert-deftest then-the-cursor-should-be-after-is-after ()
+(ert-deftest then-the-cursor-should-be-after-is-after-2 ()
   "Should be after when after."
   (with-playground
    (insert "foobarbaz")
@@ -512,13 +512,13 @@
    (mock (set-mark-command 4))
    (When "I pop the mark")))
 
-(ert-deftest then-the-region-should-be-arg ()
+(ert-deftest then-the-region-should-be-arg-1 ()
   "Should be region."
   (with-mock
    (stub espuds-region => "REGION")
    (Then "the region should be \"REGION\"")))
 
-(ert-deftest then-the-region-should-be-arg-no-region ()
+(ert-deftest then-the-region-should-be-arg-no-region-1 ()
   "Should not be region when no region."
   (with-mock
    (stub espuds-region => "")
@@ -526,7 +526,7 @@
     (error "Expected the region to be '%s', but was '%s'." "REGION" ""))
    (Then "the region should be \"REGION\"")))
 
-(ert-deftest then-the-region-should-be-arg-wrong-region ()
+(ert-deftest then-the-region-should-be-arg-wrong-region-1 ()
   "Should not be region when wrong region."
   (with-mock
    (stub espuds-region => "REG")
@@ -534,13 +534,13 @@
     (error "Expected the region to be '%s', but was '%s'." "REGION" "REG"))
    (Then "the region should be \"REGION\"")))
 
-(ert-deftest then-the-region-should-be-arg ()
+(ert-deftest then-the-region-should-be-arg-2 ()
   "Should be region."
   (with-mock
    (stub espuds-region => "REGION")
    (Then "the region should be:" "REGION")))
 
-(ert-deftest then-the-region-should-be-arg-no-region ()
+(ert-deftest then-the-region-should-be-arg-no-region-2 ()
   "Should not be region when no region."
   (with-mock
    (stub espuds-region => "")
@@ -548,7 +548,7 @@
     (error "Expected the region to be '%s', but was '%s'." "REGION" ""))
    (Then "the region should be:" "REGION")))
 
-(ert-deftest then-the-region-should-be-arg-wrong-region ()
+(ert-deftest then-the-region-should-be-arg-wrong-region-2 ()
   "Should not be region when wrong region."
   (with-mock
    (stub espuds-region => "REG")
