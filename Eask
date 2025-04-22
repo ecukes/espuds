@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "espuds"
          "0.3.3"
          "Ecukes step definitions")
