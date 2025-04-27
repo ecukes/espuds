@@ -279,8 +279,9 @@ The value of the face PROPERTY must be one of VALID-VALUES."
 (When "^I execute the action chain$"
   "Executes the action chain."
   (lambda ()
-    (execute-kbd-macro espuds-action-chain)
-    (setq espuds-chain-active nil)))
+    (unwind-protect
+        (execute-kbd-macro espuds-action-chain)
+      (setq espuds-chain-active nil))))
 
 (When "^I call \"\\(.+\\)\"$"
   "Call the provided COMMAND"
